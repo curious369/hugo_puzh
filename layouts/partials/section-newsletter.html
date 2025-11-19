@@ -307,9 +307,9 @@
         const data = await response.json();
 
         if (response.ok) {
-          // Success!
-          form.reset();
-          showSuccessBanner(t.success);
+          // Success! Redirect to thank you page
+          const thankYouUrl = currentLang === 'de' ? '/de/profil/danke/' : '/profil/danke/';
+          window.location.href = thankYouUrl;
         } else {
           // Error from backend
           if (data.error === 'ALREADY_SUBSCRIBED') {
