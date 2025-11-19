@@ -308,7 +308,7 @@
 
         if (response.ok) {
           // Success! Redirect to thank you page
-          const thankYouUrl = currentLang === 'de' ? '/de/profil/danke/' : '/profil/danke/';
+          const thankYouUrl = currentLang === 'de' ? '/de/profil/danke/' : '/profil/thanks/';
           window.location.href = thankYouUrl;
         } else {
           // Error from backend

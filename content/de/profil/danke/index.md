@@ -7,7 +7,7 @@ layout: "mpf-block"
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <!-- Toast Notification -->
-<div id="toast" class="fixed left-1/2 transform -translate-x-1/2" style="top: -200px; z-index: 9999;">
+<div id="toast" class="fixed left-1/2 transform -translate-x-1/2" style="top: -200px; z-index: 10001;">
   <div class="text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2" style="background-color: #007aff;">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -16,7 +16,7 @@ layout: "mpf-block"
   </div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mt-6 px-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mt-6 px-6" style="background-color: #ffffff;">
   <!-- BILD OBEN LINKS -->
   <div class="flex justify-center items-start pt-4 pb-4 pr-4 pl-4">
     <img src="/images/chris-moenninghoff-head.webp"
@@ -25,8 +25,8 @@ layout: "mpf-block"
   </div>
 
   <!-- TEXT-BEREICH RECHTS -->
-  <div class="space-y-4 text-[18px] pt-4 pl-4 pr-4 pb-4">
-    <h1 class="text-xl font-bold text-left text-[#111]">
+  <div class="space-y-4 text-[18px] pt-4 pl-4 pr-4 pb-4 text-gray-900">
+    <h1 class="text-xl font-bold text-left text-gray-900">
       Fast geschafft…
     </h1>
     <div>
@@ -39,7 +39,7 @@ layout: "mpf-block"
       Danke schon einmal im voraus.<br />
   </div>
   <p>Dein Chris | SoloKreator</p>
-  <h1 class="text-xl font-bold text-left text-[#111] pt-6">
+  <h1 class="text-xl font-bold text-left text-gray-900 pt-6">
       Folge mir gerne auch hier:
     </h1>
 
@@ -80,14 +80,14 @@ layout: "mpf-block"
 </style>
 
 <div class="flex gap-4 pt-4 text-xl">
-  <a href="https://youtube.com/@monninghoff" target="_blank" class="social-icon youtube-icon" aria-label="YouTube">
+  <a href="https://youtube.com/@puzh.channel" target="_blank" class="social-icon youtube-icon" aria-label="YouTube">
     <i class="bi bi-youtube"></i>
   </a>
 
-  <a href="https://linkedin.com/in/chris-moenninghoff" target="_blank" class="social-icon linkedin-icon" aria-label="LinkedIn">
+  <a href="https://linkedin.com/company/puzh" target="_blank" class="social-icon linkedin-icon" aria-label="LinkedIn">
     <i class="bi bi-linkedin"></i>
   </a>
-  <a href="https://instagram.com/chrismoenninghoff" target="_blank" class="social-icon instagram-icon" aria-label="Instagram">
+  <a href="https://instagram.com/puzh.official" target="_blank" class="social-icon instagram-icon" aria-label="Instagram">
     <i class="bi bi-instagram"></i>
   </a>
 </div>
