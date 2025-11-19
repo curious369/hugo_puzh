@@ -3,7 +3,7 @@ title: "Datenschutzrichtlinie"
 layout: "recht"
 ---
 
-# SNAB.APP
+# PUZH.com + PUZH.app
 
 Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Im Folgenden informieren wir Sie über die Erhebung, Verarbeitung und Nutzung personenbezogener Daten auf unserer Webseite.
 
