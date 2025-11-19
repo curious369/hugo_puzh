@@ -14,7 +14,7 @@
       <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="flex items-center">
         <img src="/images/puzh-logo.svg" alt="PUZH" style="height: 40px; width: auto;" class="dark:invert">
       </a>
-      <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3" data-header-button>
+      <a href="{{ if eq .Language.Lang "de" }}/de/#newsletter{{ else }}/#newsletter{{ end }}" class="btn-pill-primary text-lg px-8 py-3" data-header-button>
         {{ if eq .Language.Lang "de" }}Zur Warteliste{{ else }}Join the Waitlist{{ end }}
       </a>
     </nav>
@@ -24,7 +24,7 @@
       <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="flex items-center">
         <img src="/images/puzh-logo.svg" alt="PUZH" style="height: 35px; width: auto;" class="dark:invert">
       </a>
-      <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3" data-header-button>
+      <a href="{{ if eq .Language.Lang "de" }}/de/#newsletter{{ else }}/#newsletter{{ end }}" class="btn-pill-primary text-lg px-8 py-3" data-header-button>
         {{ if eq .Language.Lang "de" }}Zur Warteliste{{ else }}Join the Waitlist{{ end }}
       </a>
     </nav>
@@ -34,7 +34,7 @@
       <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="flex items-center">
         <img src="/images/puzh-logo.svg" alt="PUZH" style="height: 28px; width: auto;" class="dark:invert">
       </a>
-      <a href="#newsletter" class="btn-pill-primary text-sm" data-header-button>
+      <a href="{{ if eq .Language.Lang "de" }}/de/#newsletter{{ else }}/#newsletter{{ end }}" class="btn-pill-primary text-sm" data-header-button>
         {{ if eq .Language.Lang "de" }}Zur Warteliste{{ else }}Join the Waitlist{{ end }}
       </a>
     </div>
