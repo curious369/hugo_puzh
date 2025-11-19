@@ -1,0 +1,60 @@
+{{/* ✅ LEGAL SUB-NAVIGATION */}}
+{{ $current := .RelPermalink }}
+
+<!-- Normal div - wird in fixed wrapper in single.html eingefügt -->
+<div class="subheader w-full" style="height: 50px; display: flex; align-items: center;">
+  <div class="max-w-[980px] mx-auto w-full flex justify-between items-center px-5 text-[15px]">
+
+    <!-- Left: Label (FETT) mit Background, z-index und gleichem Padding wie links (20px) -->
+    {{ if eq .Language.Lang "de" }}
+      <div class="font-bold text-[#111] dark:text-white whitespace-nowrap bg-gray-200 dark:bg-gray-800" style="position: relative; z-index: 2; padding-right: 20px; margin-right: 8px;">
+        Rechtliches
+      </div>
+    {{ else }}
+      <div class="font-bold text-[#111] dark:text-white whitespace-nowrap bg-gray-200 dark:bg-gray-800" style="position: relative; z-index: 2; padding-right: 20px; margin-right: 8px;">
+        Legal
+      </div>
+    {{ end }}
+
+    <!-- Right: Links (scrollable on mobile) -->
+    <div class="overflow-x-auto no-scrollbar whitespace-nowrap scroll-smooth pr-4">
+      <div class="inline-flex gap-4 min-w-full">
+        {{ if eq .Language.Lang "de" }}
+          <!-- DE Links - normale Schrift, nur aktiv = blau (nicht fett) -->
+          <a href="/de/datenschutz/" class="transition-colors {{ if strings.HasPrefix $current "/de/datenschutz" }}text-[#007aff]{{ else }}text-[#111] dark:text-gray-300 hover:text-[#007aff] dark:hover:text-[#007aff]{{ end }}">
+            Datenschutzrichtlinie
+          </a>
+          <a href="/de/cookies/" class="transition-colors {{ if strings.HasPrefix $current "/de/cookies" }}text-[#007aff]{{ else }}text-[#111] dark:text-gray-300 hover:text-[#007aff] dark:hover:text-[#007aff]{{ end }}">
+            Verwendung von Cookies
+          </a>
+          <a href="/de/impressum/" class="transition-colors {{ if strings.HasPrefix $current "/de/impressum" }}text-[#007aff]{{ else }}text-[#111] dark:text-gray-300 hover:text-[#007aff] dark:hover:text-[#007aff]{{ end }}">
+            Impressum
+          </a>
+        {{ else }}
+          <!-- EN Links - normale Schrift, nur aktiv = blau (nicht fett) -->
+          <a href="/privacy/" class="transition-colors {{ if strings.HasPrefix $current "/privacy" }}text-[#007aff]{{ else }}text-[#111] dark:text-gray-300 hover:text-[#007aff] dark:hover:text-[#007aff]{{ end }}">
+            Privacy Policy
+          </a>
+          <a href="/cookies/" class="transition-colors {{ if and (strings.Contains $current "/cookies") (not (strings.HasPrefix $current "/de/")) }}text-[#007aff]{{ else }}text-[#111] dark:text-gray-300 hover:text-[#007aff] dark:hover:text-[#007aff]{{ end }}">
+            Use of Cookies
+          </a>
+          <a href="/imprint/" class="transition-colors {{ if strings.HasPrefix $current "/imprint" }}text-[#007aff]{{ else }}text-[#111] dark:text-gray-300 hover:text-[#007aff] dark:hover:text-[#007aff]{{ end }}">
+            Imprint
+          </a>
+        {{ end }}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

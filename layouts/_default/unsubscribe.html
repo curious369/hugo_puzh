@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>{{ .Title }} - PUZH.com</title>
+  <meta name="description" content="{{ if eq .Language.Lang "de" }}Newsletter abgemeldet{{ else }}Newsletter unsubscribed{{ end }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- CSS -->
+  {{ $styles := resources.Get "css/main.css" | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}">
+</head>
+
+<body class="bg-white min-h-screen flex flex-col">
+
+  <!-- Header (minimal) -->
+  {{ partial "header.html" . }}
+
+  <!-- Header Spacing -->
+  <div style="height:50px;"></div>
+
+  <!-- Main Content -->
+  <main class="flex-1">
+    <div class="max-w-[980px] mx-auto px-5 pt-4 pb-4">
+      <!-- Headline -->
+      <h1 class="text-2xl font-bold text-center text-[#111] mt-0 mb-8">
+        {{ .Title }}
+      </h1>
+
+      <!-- Weißer Container -->
+      <div class="bg-white p-3 sm:p-8 shadow-md rounded-[23px]">
+
+        <!-- Success Icon -->
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
+            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="text-center text-[18px] space-y-4">
+          <p>
+            {{ if eq .Language.Lang "de" }}
+              Du hast dich erfolgreich von unserer Liste entfernt.
+            {{ else }}
+              You've successfully removed yourself from our list.
+            {{ end }}
+          </p>
+          <p>
+            {{ if eq .Language.Lang "de" }}
+              Schade – aber vielleicht sehen wir uns wieder. 👋
+            {{ else }}
+              Sorry to see you go – but maybe we'll see you again. 👋
+            {{ end }}
+          </p>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="text-center mt-8">
+          <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="inline-block bg-[#007aff] text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">
+            {{ if eq .Language.Lang "de" }}Zurück zur Startseite{{ else }}Back to Homepage{{ end }}
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  {{ partial "footer.html" . }}
+
+</body>
+</html>

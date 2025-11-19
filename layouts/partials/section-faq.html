@@ -1,0 +1,14 @@
+<section id="faq" class="section-container bg-white">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl font-bold text-snab-navy mb-12 text-center">{{ .Params.faq.headline }}</h2>
+    <div class="space-y-6">
+      {{ range .Params.faq.questions }}
+      <div class="card">
+        <h3 class="text-xl font-bold text-snab-navy mb-3">{{ .q }}</h3>
+        <div class="prose text-gray-700">{{ .a | markdownify }}</div>
+      </div>
+      {{ end }}
+    </div>
+    <div class="text-center mt-12 prose mx-auto">{{ .Params.faq.more_questions }}<br>📧 {{ .Params.faq.contact_email }}</div>
+  </div>
+</section>

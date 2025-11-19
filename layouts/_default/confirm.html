@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>{{ .Title }} - PUZH.com</title>
+  <meta name="description" content="{{ if eq .Language.Lang "de" }}Newsletter-Anmeldung bestätigt{{ else }}Newsletter subscription confirmed{{ end }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- CSS -->
+  {{ $styles := resources.Get "css/main.css" | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}">
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="bg-white min-h-screen flex flex-col">
+
+  <!-- Header (minimal) -->
+  {{ partial "header.html" . }}
+
+  <!-- Header Spacing -->
+  <div style="height:50px;"></div>
+
+  <!-- Main Content -->
+  <main class="flex-1">
+    <div class="max-w-[980px] mx-auto px-5 pt-4 pb-4">
+
+      <!-- Loading State -->
+      <div id="loading-state" class="text-center">
+        <h1 class="text-2xl font-bold text-center text-[#111] mt-0 mb-8">
+          {{ if eq .Language.Lang "de" }}Bestätige deine Anmeldung...{{ else }}Confirming your subscription...{{ end }}
+        </h1>
+        <div class="bg-white p-8 shadow-md rounded-[23px]">
+          <div class="inline-block w-12 h-12 border-4 border-gray-300 border-t-[#007aff] rounded-full animate-spin mb-4"></div>
+        </div>
+      </div>
+
+      <!-- Success State -->
+      <div id="success-state" class="hidden">
+        <!-- Headline -->
+        <h1 class="text-2xl font-bold text-center text-[#111] mt-0 mb-8">
+          {{ if eq .Language.Lang "de" }}Das fühlt sich doch gleich viel besser an.{{ else }}That feels much better.{{ end }}
+        </h1>
+
+        <!-- Weißer Container -->
+        <div class="bg-white p-3 sm:p-8 shadow-md rounded-[23px]">
+
+          <!-- Success Icon -->
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
+              <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Success Message -->
+          <div class="text-center text-[18px] mb-8">
+            <p class="mb-4">
+              {{ if eq .Language.Lang "de" }}
+                Deine Newsletter-Anmeldung wurde erfolgreich bestätigt.
+              {{ else }}
+                Your newsletter subscription has been confirmed.
+              {{ end }}
+            </p>
+          </div>
+
+          <!-- OG Code Section (only shown if applicable) -->
+          <div id="og-code-section" class="hidden max-w-md mx-auto mb-8">
+            <div class="border-2 border-[#007aff] rounded-[23px] p-6 bg-gray-50">
+              <h2 class="text-xl font-bold mb-3 text-center">
+                {{ if eq .Language.Lang "de" }}🎉 Dein OG Code{{ else }}🎉 Your OG Code{{ end }}
+              </h2>
+              <p class="text-sm text-gray-600 mb-4 text-center">
+                {{ if eq .Language.Lang "de" }}
+                  Als Early Supporter erhältst du exklusiven Zugang:
+                {{ else }}
+                  As an early supporter, you get exclusive access:
+                {{ end }}
+              </p>
+              <div class="bg-white border-2 border-[#007aff] rounded-full p-4 mb-4">
+                <code id="og-code-display" class="text-2xl font-mono font-bold text-[#007aff] block text-center">
+                  <!-- OG Code wird hier eingefügt -->
+                </code>
+              </div>
+              <p class="text-xs text-gray-500 text-center">
+                {{ if eq .Language.Lang "de" }}
+                  Bewahre diesen Code gut auf. Du erhältst ihn auch per E-Mail.
+                {{ else }}
+                  Keep this code safe. You'll also receive it via email.
+                {{ end }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Next Steps -->
+          <div class="text-center text-base text-gray-700 mb-8">
+            <p>
+              {{ if eq .Language.Lang "de" }}
+                Du erhältst ab sofort Updates zu PUZH.com direkt in dein Postfach.
+              {{ else }}
+                You'll now receive updates about PUZH.com directly in your inbox.
+              {{ end }}
+            </p>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="text-center">
+            <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="inline-block bg-[#007aff] text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">
+              {{ if eq .Language.Lang "de" }}Zurück zur Startseite{{ else }}Back to Homepage{{ end }}
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-state" class="hidden">
+        <!-- Headline -->
+        <h1 class="text-2xl font-bold text-center text-red-600 mt-0 mb-8">
+          {{ if eq .Language.Lang "de" }}❌ Etwas ist schiefgelaufen{{ else }}❌ Something Went Wrong{{ end }}
+        </h1>
+
+        <!-- Weißer Container -->
+        <div class="bg-white p-3 sm:p-8 shadow-md rounded-[23px]">
+
+          <!-- Error Icon -->
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full">
+              <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Error Message -->
+          <div class="text-center text-[18px] mb-8">
+            <p id="error-message-text" class="text-gray-700"></p>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="text-center">
+            <a href="{{ if eq .Language.Lang "de" }}/de/#newsletter{{ else }}/#newsletter{{ end }}" class="inline-block bg-[#007aff] text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">
+              {{ if eq .Language.Lang "de" }}Erneut versuchen{{ else }}Try Again{{ end }}
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  {{ partial "footer.html" . }}
+
+  <!-- Confirmation JavaScript -->
+  <script>
+    (function() {
+      const loadingState = document.getElementById('loading-state');
+      const successState = document.getElementById('success-state');
+      const errorState = document.getElementById('error-state');
+      const ogCodeSection = document.getElementById('og-code-section');
+      const ogCodeDisplay = document.getElementById('og-code-display');
+      const errorMessageText = document.getElementById('error-message-text');
+
+      // Get current language
+      const currentLang = '{{ .Language.Lang }}';
+
+      // Translations
+      const translations = {
+        en: {
+          errorInvalidToken: 'This confirmation link is invalid or has expired.',
+          errorAlreadyConfirmed: 'This email has already been confirmed.',
+          errorGeneric: 'Unable to confirm your subscription. Please try again or contact support.',
+          errorNoToken: 'No confirmation token provided. Please check your email for the confirmation link.',
+          errorTokenExpired: 'This confirmation link has expired. Please request a new one.'
+        },
+        de: {
+          errorInvalidToken: 'Dieser Bestätigungslink ist ungültig oder abgelaufen.',
+          errorAlreadyConfirmed: 'Diese E-Mail wurde bereits bestätigt.',
+          errorGeneric: 'Deine Anmeldung konnte nicht bestätigt werden. Bitte versuche es erneut oder kontaktiere den Support.',
+          errorNoToken: 'Kein Bestätigungstoken angegeben. Bitte prüfe deine E-Mails für den Bestätigungslink.',
+          errorTokenExpired: 'Dieser Bestätigungslink ist abgelaufen. Bitte fordere einen neuen an.'
+        }
+      };
+
+      const t = translations[currentLang] || translations.en;
+
+      // Show error
+      function showError(message) {
+        loadingState.classList.add('hidden');
+        errorMessageText.textContent = message;
+        errorState.classList.remove('hidden');
+      }
+
+      // Show success
+      function showSuccess(data) {
+        loadingState.classList.add('hidden');
+
+        // Show OG code if present
+        if (data.ogCode) {
+          ogCodeDisplay.textContent = data.ogCode;
+          ogCodeSection.classList.remove('hidden');
+        }
+
+        successState.classList.remove('hidden');
+
+        // Trigger confetti 🎉
+        setTimeout(() => {
+          triggerConfetti();
+        }, 200);
+      }
+
+      // Confetti animation
+      function triggerConfetti() {
+        const duration = 3000;
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function() {
+          const timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          const particleCount = 50 * (timeLeft / duration);
+
+          confetti(Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+          }));
+          confetti(Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+          }));
+        }, 250);
+      }
+
+      // Confirm subscription
+      async function confirmSubscription(token) {
+        try {
+          // Cloudflare Worker URL
+          const workerUrl = 'https://snab-newsletter.monninghoff.workers.dev/confirm';
+
+          const response = await fetch(workerUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              token: token,
+              language: currentLang
+            })
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            // Success!
+            showSuccess(data);
+          } else {
+            // Error from backend
+            let errorMsg = t.errorGeneric;
+
+            if (data.error === 'INVALID_TOKEN') {
+              errorMsg = t.errorInvalidToken;
+            } else if (data.error === 'ALREADY_CONFIRMED') {
+              errorMsg = t.errorAlreadyConfirmed;
+            } else if (data.error === 'TOKEN_EXPIRED') {
+              // Redirect to token-expired page with email
+              const email = data.email || '';
+              window.location.href = `{{ if eq .Language.Lang "de" }}/de{{ end }}/token-expired?email=${encodeURIComponent(email)}`;
+              return;
+            } else if (data.message) {
+              errorMsg = data.message;
+            }
+
+            showError(errorMsg);
+          }
+
+        } catch (error) {
+          console.error('Confirmation error:', error);
+          showError(t.errorGeneric);
+        }
+      }
+
+      // Get token from URL
+      function getTokenFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('token');
+      }
+
+      // Initialize
+      function init() {
+        // TEST MODE: Check for ?test=true in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const isTestMode = urlParams.get('test') === 'true';
+
+        if (isTestMode) {
+          // Show test success with OG code
+          showSuccess({
+            ogCode: 'OG-SNAB-TEST1',
+            email: 'test@example.com'
+          });
+          return;
+        }
+
+        const token = getTokenFromUrl();
+
+        if (!token) {
+          showError(t.errorNoToken);
+          return;
+        }
+
+        // Confirm subscription
+        confirmSubscription(token);
+      }
+
+      // Run on page load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

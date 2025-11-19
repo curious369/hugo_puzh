@@ -1,0 +1,21 @@
+<section id="app-reveal" class="section-container bg-gradient-to-br from-snab-navy to-black text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-5xl font-bold mb-6">{{ .Params.app_reveal.pattern_interrupt }}</h2>
+    <div class="prose prose-lg prose-invert mx-auto mb-12">{{ .Params.app_reveal.intro | markdownify }}</div>
+    <h3 class="text-4xl font-bold text-snab-orange mb-6">{{ .Params.app_reveal.but_headline }}</h3>
+    <div class="prose prose-xl prose-invert mx-auto mb-16">{{ .Params.app_reveal.but_body | markdownify }}</div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">{{ .Params.app_reveal.headline }}</h2>
+    <div class="prose prose-lg prose-invert mx-auto mb-12">{{ .Params.app_reveal.reminder | markdownify }}</div>
+    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 mb-12 border border-white border-opacity-20">
+      <h3 class="text-2xl font-bold mb-6">{{ .Params.app_reveal.how_headline }}</h3>
+      <ol class="text-left space-y-3 inline-block text-lg">
+        {{ range $i, $step := .Params.app_reveal.how_steps }}<li>{{ add $i 1 }}. {{ $step }}</li>{{ end }}
+      </ol>
+    </div>
+    <div class="flex flex-col md:flex-row gap-4 justify-center">
+      <a href="{{ .Site.Params.appStoreLink }}" class="btn-primary bg-snab-orange">{{ .Params.app_reveal.cta_primary }}</a>
+      <a href="#masterclass" class="btn-outline border-white text-white hover:bg-white hover:text-snab-navy">{{ .Params.app_reveal.cta_secondary }}</a>
+    </div>
+    <p class="text-sm mt-4 text-white text-opacity-75">{{ .Params.app_reveal.cta_note }}</p>
+  </div>
+</section>

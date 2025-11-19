@@ -1,0 +1,77 @@
+baseURL = "https://puzh.com"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+# Enable Emoji support
+enableEmoji = true
+
+# Disable taxonomy pages
+disableKinds = ["taxonomy", "term"]
+
+# Multi-Language Configuration
+[languages]
+  [languages.en]
+    languageCode = "en-US"
+    languageName = "English"
+    title = "PUZH - Your Productivity System"
+    weight = 1
+    contentDir = "content/en"
+
+  [languages.de]
+    languageCode = "de-DE"
+    languageName = "Deutsch"
+    title = "PUZH - Dein Produktivitätssystem"
+    weight = 2
+    contentDir = "content/de"
+
+[params]
+  description = "PUZH - The minimal productivity system. Join the waitlist."
+  author = "Chris Monninghoff"
+
+  # Social & Contact
+  email = "hello@puzh.com"
+  twitter = "@puzh_com"
+  instagram = "@puzh.com"
+  linkedin = "chris-monninghoff"
+
+  # App Links
+  appStoreLink = "[TBD-APP-STORE-LINK]"
+
+  # Stats (Platzhalter)
+  totalUsers = "15,000+"
+  totalDocuments = "500,000+"
+  totalIdeas = "50,000+"
+  avgTimeSaved = "10-17h/Woche"
+
+  # MasterClass
+  masterClassDate = "[TBD-DATUM]"
+  masterClassTime = "19:00 Uhr"
+  masterClassSpots = "200"
+
+  # Pricing
+  basicPrice = "4,99€"
+  proPrice = "9,99€"
+
+  # Legal
+  companyName = "PUZH.com"
+  country = "Deutschland"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Output formats
+[outputs]
+  home = ["HTML"]
+  page = ["HTML"]
+
+# Build settings for Cloudflare Pages
+[build]
+  publish = "public"
+  command = "hugo --gc --minify"
+
+[deployment]
+  [[deployment.targets]]
+    name = "cloudflare"
+    URL = "cloudflare-pages"

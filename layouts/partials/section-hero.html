@@ -1,0 +1,90 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO SECTION - A/B/C VARIANTS (Rotating on page load)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section class="relative pt-40 pb-16 md:pt-40 md:pb-20 flex items-center justify-center px-4 bg-white dark:bg-gray-950">
+  <div class="container-puzh text-center">
+
+    <!-- VARIANT A - "Minimal Power" - BLACK/WHITE LOGO -->
+    <div data-hero-variant="variant-a" style="display: none;">
+      <div class="mb-4 flex justify-center">
+        <img src="/images/logo_puzh_black.svg" alt="PUZH" class="dark:hidden" style="height: 80px; width: auto;">
+        <img src="/images/logo_puzh_white.svg" alt="PUZH" class="hidden dark:block" style="height: 80px; width: auto;">
+      </div>
+      <style>
+        @media (min-width: 768px) {
+          [data-hero-variant] img[alt="PUZH"] { height: 120px !important; }
+        }
+        @media (min-width: 1024px) {
+          [data-hero-variant] img[alt="PUZH"] { height: 192px !important; }
+        }
+      </style>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance leading-tight text-gray-900 dark:text-white">
+        {{ (index .Params.hero_variants 0).headline | safeHTML }}
+      </h1>
+      <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-tight">
+        {{ (index .Params.hero_variants 0).subheadline | safeHTML }}
+      </p>
+      <div class="flex justify-center">
+        <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3">
+          {{ (index .Params.hero_variants 0).cta_primary }}
+        </a>
+      </div>
+    </div>
+
+    <!-- VARIANT B - "Tech-Focused" - BLUE/GREEN LOGO -->
+    <div data-hero-variant="variant-b" style="display: none;">
+      <div class="mb-4 flex justify-center">
+        <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="dark:hidden" style="height: 80px; width: auto;">
+        <img src="/images/logo_puzh_green.svg" alt="PUZH" class="hidden dark:block" style="height: 80px; width: auto;">
+      </div>
+      <style>
+        @media (min-width: 768px) {
+          [data-hero-variant] img[alt="PUZH"] { height: 120px !important; }
+        }
+        @media (min-width: 1024px) {
+          [data-hero-variant] img[alt="PUZH"] { height: 192px !important; }
+        }
+      </style>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance leading-tight text-gray-900 dark:text-white">
+        {{ (index .Params.hero_variants 1).headline | safeHTML }}
+      </h1>
+      <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-tight">
+        {{ (index .Params.hero_variants 1).subheadline | safeHTML }}
+      </p>
+      <div class="flex justify-center">
+        <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3">
+          {{ (index .Params.hero_variants 1).cta_primary }}
+        </a>
+      </div>
+    </div>
+
+    <!-- VARIANT C - "Identity/Lifestyle" - GREEN/BLUE LOGO -->
+    <div data-hero-variant="variant-c" style="display: none;">
+      <div class="mb-4 flex justify-center">
+        <img src="/images/logo_puzh_green.svg" alt="PUZH" class="dark:hidden" style="height: 80px; width: auto;">
+        <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="hidden dark:block" style="height: 80px; width: auto;">
+      </div>
+      <style>
+        @media (min-width: 768px) {
+          [data-hero-variant] img[alt="PUZH"] { height: 120px !important; }
+        }
+        @media (min-width: 1024px) {
+          [data-hero-variant] img[alt="PUZH"] { height: 192px !important; }
+        }
+      </style>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance leading-tight text-gray-900 dark:text-white">
+        {{ (index .Params.hero_variants 2).headline | safeHTML }}
+      </h1>
+      <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-tight">
+        {{ (index .Params.hero_variants 2).subheadline | safeHTML }}
+      </p>
+      <div class="flex justify-center">
+        <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3">
+          {{ (index .Params.hero_variants 2).cta_primary }}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

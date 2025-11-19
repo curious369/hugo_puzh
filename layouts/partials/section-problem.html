@@ -1,0 +1,41 @@
+<section id="problem" class="section-container bg-white">
+  <div class="max-w-4xl mx-auto">
+    <!-- Story Headline -->
+    <h2 class="text-4xl md:text-5xl font-bold text-snab-navy mb-8 text-center">
+      {{ .Params.problem.headline }}
+    </h2>
+
+    <!-- Story -->
+    <div class="prose prose-lg md:prose-xl max-w-none mb-12 text-gray-700">
+      {{ .Params.problem.story | markdownify }}
+    </div>
+
+    <!-- Truth Section -->
+    <div class="bg-snab-grey rounded-2xl p-8 md:p-12 mb-8">
+      <h3 class="text-3xl font-bold text-snab-navy mb-4">
+        {{ .Params.problem.truth_headline }}
+      </h3>
+      <p class="text-xl text-snab-dark mb-6">
+        {{ .Params.problem.truth_subheadline }}
+      </p>
+      <div class="prose prose-lg max-w-none text-gray-700">
+        {{ .Params.problem.truth_body | markdownify }}
+      </div>
+    </div>
+
+    <!-- Future Visualization -->
+    <div class="bg-red-50 border-l-4 border-red-500 rounded-r-2xl p-8 md:p-12 mb-8">
+      <h3 class="text-3xl font-bold text-red-900 mb-4">
+        {{ .Params.problem.future_headline }}
+      </h3>
+      <div class="prose prose-lg max-w-none text-red-800">
+        {{ .Params.problem.future_body | markdownify }}
+      </div>
+    </div>
+
+    <!-- Transition -->
+    <div class="text-center text-2xl font-semibold text-snab-blue mt-12">
+      {{ .Params.problem.transition }}
+    </div>
+  </div>
+</section>

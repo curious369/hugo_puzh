@@ -1,0 +1,74 @@
+<section id="masterclass" class="section-container bg-gradient-to-br from-snab-orange to-red-600 text-white">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center">
+      {{ .Params.masterclass.headline }}
+    </h2>
+
+    <!-- What You Learn -->
+    <div class="mb-12">
+      <h3 class="text-2xl font-bold mb-8">{{ .Params.masterclass.what_you_learn_headline }}</h3>
+      <div class="space-y-6">
+        {{ range .Params.masterclass.what_you_learn }}
+        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20">
+          <h4 class="text-xl font-bold mb-2">✅ {{ .title }}</h4>
+          <div class="text-white text-opacity-90 prose prose-invert">
+            {{ .description | markdownify }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- Value -->
+    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 md:p-12 mb-12 border border-white border-opacity-20 text-center">
+      <h3 class="text-3xl font-bold mb-4">{{ .Params.masterclass.value_headline }}</h3>
+      <p class="text-2xl font-bold mb-2">{{ .Params.masterclass.value_normal }}</p>
+      <p class="mb-4">{{ .Params.masterclass.value_explanation }}</p>
+      <p class="text-3xl font-bold text-snab-orange mb-2">{{ .Params.masterclass.value_today }}</p>
+      <p class="mb-4">{{ .Params.masterclass.value_why }}</p>
+      <p class="text-xl font-semibold">{{ .Params.masterclass.value_win_win }}</p>
+    </div>
+
+    <!-- Next MasterClass Info -->
+    <div class="bg-white text-snab-navy rounded-2xl p-8 md:p-12 mb-8">
+      <h3 class="text-2xl font-bold mb-6">{{ .Params.masterclass.next_masterclass_headline }}</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-8 text-lg">
+        <div><strong>📅 Datum:</strong> {{ .Params.masterclass.next_masterclass_date }}</div>
+        <div><strong>⏱️ Dauer:</strong> {{ .Params.masterclass.next_masterclass_duration }}</div>
+        <div><strong>💻 Platform:</strong> {{ .Params.masterclass.next_masterclass_platform }}</div>
+        <div><strong>🎟️ Plätze:</strong> {{ .Params.masterclass.next_masterclass_spots }} {{ .Params.masterclass.next_masterclass_spots_note }}</div>
+      </div>
+
+      <!-- Form -->
+      <div class="bg-snab-grey rounded-xl p-6">
+        <h4 class="text-xl font-bold mb-4">{{ .Params.masterclass.form_headline }}</h4>
+        <form id="masterclass-form" class="space-y-4" action="[TBD-FORM-ACTION]" method="POST">
+          {{ range .Params.masterclass.form_fields }}
+          <div>
+            <label for="{{ .name }}" class="block text-sm font-semibold mb-2">{{ .label }}</label>
+            <input type="{{ .type }}" id="{{ .name }}" name="{{ .name }}" {{ if .required }}required{{ end }} class="input-field text-snab-navy">
+          </div>
+          {{ end }}
+          <button type="submit" class="btn-primary bg-snab-orange w-full">
+            {{ .Params.masterclass.form_button }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Promise -->
+    <div class="text-center mb-8">
+      <p class="font-bold mb-4">{{ .Params.masterclass.promise_headline }}</p>
+      <ul class="text-sm space-y-2 inline-block text-left">
+        {{ range .Params.masterclass.promise_items }}
+        <li>✅ {{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+
+    <!-- Social Proof -->
+    <p class="text-center text-lg font-semibold">
+      {{ .Params.masterclass.social_proof }}
+    </p>
+  </div>
+</section>

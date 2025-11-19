@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Updated: Navigation gaps optimized */
+
+/* ═══════════════════════════════════════════════════════════════
+   PUZH.COM - RESPONSIVE DESIGN SYSTEM
+   ═══════════════════════════════════════════════════════════════
+   BREAKPOINTS (Apple Standard):
+   - iPhone: < 768px
+   - iPad: 768px - 1024px
+   - Desktop: > 1024px
+
+   CONTAINER:
+   - iPhone/iPad: Full-width (px-4)
+   - Desktop: max-w-[1100px] centered
+
+   Font-Größen IN STEIN GEMEISSELT (wie monninghoff.com):
+   - text-5xl: Hero Headline
+   - text-4xl: Section Headlines
+   - text-xl: Body Text
+   - text-sm: Nav, Footer, Buttons
+   - text-xs: Micro Copy
+
+   PillButtons: px-4 py-1.5 rounded-full text-sm font-medium
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    @apply bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-200;
+  }
+
+  body {
+    @apply antialiased font-sans;
+  }
+}
+
+@layer components {
+  /* Container System - Responsive */
+  .container-puzh {
+    @apply w-full px-4 mx-auto;
+    @apply lg:max-w-content; /* 1100px on desktop */
+  }
+
+  /* PillButtons - EXAKT wie monninghoff.com */
+  .btn-pill {
+    @apply px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200;
+  }
+
+  .btn-pill-primary {
+    @apply btn-pill bg-primary-600 dark:bg-white text-white dark:text-black
+           hover:bg-primary-700 dark:hover:bg-gray-100;
+  }
+
+  .btn-pill-outline {
+    @apply btn-pill border border-gray-900 dark:border-white
+           text-gray-900 dark:text-white
+           hover:bg-gray-900 dark:hover:bg-white
+           hover:text-white dark:hover:text-gray-900;
+  }
+
+  /* Input fields */
+  .input-puzh {
+    @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-600
+           bg-white dark:bg-gray-800 text-gray-900 dark:text-white
+           placeholder-gray-400 dark:placeholder-gray-500
+           focus:outline-none focus:border-gray-900 dark:focus:border-gray-400
+           transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  /* Text balance (for headlines) */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+
+  /* Force text wrapping in all cards */
+  .flex-shrink-0 h3,
+  .flex-shrink-0 p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* Overlay Slider - FIXED VERSION
+     ═══════════════════════════════════════════════════════════
+     Desktop: First card starts at LEFT CONTAINER EDGE (pink line)
+              Then scrolls right beyond container (overlay)
+     Mobile:  Edge-to-edge with px-4
+     ═══════════════════════════════════════════════════════════ */
+
+  /* Desktop: Slider with BOTH side paddings for container alignment
+     ═══════════════════════════════════════════════════════════
+     Initial scroll: RIGHT (last card visible at container right edge)
+     Scroll LEFT: first card aligns with container left edge
+     JavaScript sets initial scrollLeft to max (scroll to right)
+     ═══════════════════════════════════════════════════════════ */
+  @media (min-width: 1024px) {
+    .slider-end-container {
+      padding-left: calc((100vw - 1100px) / 2);
+      padding-right: calc((100vw - 1100px) / 2);
+    }
+  }
+}
+
+/* Selection color */
+::selection {
+  @apply bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900;
+}
+
+/* Focus visible (accessibility) */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-gray-900 dark:outline-gray-400;
+}

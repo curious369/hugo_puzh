@@ -1,0 +1,130 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     LANGUAGE NOTIFICATION BANNER - Apple.com Style
+     ═══════════════════════════════════════════════════════════
+     - Appears only for DE visitors on EN site
+     - Slides down from top
+     - Cookie remembers user choice
+     - Geo-detection via JavaScript
+     ═══════════════════════════════════════════════════════════ -->
+
+<div id="language-banner" class="fixed top-6 z-[10001] transition-all duration-1000 ease-out" style="left: 50%; transform: translate(-50%, -200px); opacity: 0;">
+  <div class="flex items-center gap-4 px-7 py-2.5 bg-gray-100/95 border border-gray-300 rounded-full shadow-2xl">
+
+    <svg class="w-5 h-5 text-gray-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+    </svg>
+
+    <p class="text-sm md:text-base text-gray-900 font-medium whitespace-nowrap">
+      Möchten Sie auf die deutsche Webseite wechseln?
+    </p>
+
+    <button
+      onclick="switchToGerman()"
+      class="px-4 py-1.5 text-sm font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors flex-shrink-0">
+      Ja
+    </button>
+
+    <button
+      onclick="dismissBanner()"
+      class="p-1.5 text-gray-900 hover:text-red-500 transition-colors flex-shrink-0"
+      aria-label="Close">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+  </div>
+</div>
+
+<!-- Language Banner JavaScript -->
+<script>
+  (function() {
+    const COOKIE_NAME = 'snab_lang_preference';
+    const COOKIE_DURATION = 365; // days
+    const banner = document.getElementById('language-banner');
+
+    // Cookie utilities
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Show banner with animation
+    function showBanner() {
+      // Trigger reflow for animation
+      banner.offsetHeight;
+      setTimeout(() => {
+        banner.style.transform = 'translate(-50%, 0)';
+        banner.style.opacity = '1';
+      }, 50);
+    }
+
+    // Hide banner with animation
+    function hideBanner() {
+      banner.style.transform = 'translate(-50%, -200px)';
+      banner.style.opacity = '0';
+    }
+
+    // Switch to German site
+    window.switchToGerman = function() {
+      setCookie(COOKIE_NAME, 'de', COOKIE_DURATION);
+      window.location.href = '/de/';
+    };
+
+    // Dismiss banner
+    window.dismissBanner = function() {
+      setCookie(COOKIE_NAME, 'en', COOKIE_DURATION);
+      hideBanner();
+    };
+
+    // Check if should show banner
+    async function checkShowBanner() {
+      // Only on English site (check if we're NOT on /de/ path)
+      if (window.location.pathname.startsWith('/de/')) {
+        return;
+      }
+
+      // Check if user already made a choice
+      const userPreference = getCookie(COOKIE_NAME);
+      if (userPreference) {
+        return; // User already decided
+      }
+
+      // Geo-detection: Check if user is from Germany
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+
+        if (data.country_code === 'DE') {
+          // User is from Germany and on EN site → show banner
+          setTimeout(() => {
+            showBanner();
+          }, 1000); // Show after 1 second delay
+        }
+      } catch (error) {
+        console.log('Geo-detection failed:', error);
+        // Fail silently - don't show banner if detection fails
+      }
+    }
+
+    // Initialize on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', checkShowBanner);
+    } else {
+      checkShowBanner();
+    }
+  })();
+</script>

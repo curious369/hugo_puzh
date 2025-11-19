@@ -1,0 +1,150 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     PORTRAIT CARD SLIDER - Apple Watch Style
+     ═══════════════════════════════════════════════════════════════
+     Style: Portrait photos with badge + headline overlay
+     Purpose: Showcase lifestyle/use-case images
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section id="portrait-slider" class="bg-white dark:bg-gray-950 py-16 md:py-20 transition-colors duration-200">
+
+  <!-- Section Header - EXACT 1100px Container Alignment -->
+  <div class="w-full max-w-[1100px] mx-auto px-8 mb-12">
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-gray-900 dark:text-white transition-colors duration-200">
+      {{ .Params.portrait_slider.headline | default "Lern die Apple Watch kennen." }}
+    </h2>
+    {{ if .Params.portrait_slider.subheadline }}
+    <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 transition-colors duration-200">
+      {{ .Params.portrait_slider.subheadline }}
+    </p>
+    {{ end }}
+  </div>
+
+  <!-- SLIDER Container - Apple Style: Start left, scroll right beyond edge -->
+  <div class="relative w-full overflow-hidden bg-white dark:bg-gray-950 transition-colors duration-200">
+    <div class="w-full overflow-x-auto scrollbar-hide bg-white dark:bg-gray-950 transition-colors duration-200" id="portrait-slider-container">
+      <div class="flex pb-8 pl-4 pr-4 lg:pl-0 lg:pr-0"
+           style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 30px;">
+
+      <style>
+        @media (min-width: 1024px) {
+          #portrait-slider-container > div {
+            padding-left: calc((100vw - 1100px) / 2 + 2rem) !important;
+            padding-right: calc((100vw - 1100px) / 2 + 2rem) !important;
+          }
+        }
+      </style>
+
+      <!-- First card aligns with 1100px container left edge -->
+
+      {{ range $index, $card := .Params.portrait_slider.cards }}
+      <!-- Portrait Card {{ add $index 1 }} - Apple Style | Mobile: 280x500 | iPad: 360x640 | Desktop: 450x850 -->
+      <div class="flex-shrink-0 bg-white dark:bg-gray-900 overflow-hidden transition-all duration-300" style="scroll-snap-align: start; width: 280px; height: 500px; border-radius: 32px;" onmouseenter="this.style.transform='scale(1.005)'" onmouseleave="this.style.transform='scale(1)'">
+
+      <style>
+        /* iPad/Tablet Breakpoint */
+        @media (min-width: 768px) {
+          #portrait-slider-container .flex-shrink-0 {
+            width: 360px !important;
+            height: 640px !important;
+            border-radius: 32px !important;
+          }
+        }
+        /* Desktop Breakpoint */
+        @media (min-width: 1024px) {
+          #portrait-slider-container .flex-shrink-0 {
+            width: 450px !important;
+            height: 850px !important;
+            border-radius: 32px !important;
+          }
+        }
+      </style>
+
+        <!-- Image Container with Overlay Text -->
+        <div class="relative w-full h-full">
+
+          <!-- Background Image -->
+          <img
+            src="{{ $card.image }}"
+            alt="{{ $card.title }}"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+
+          <!-- Gradient Overlay for Text Readability -->
+          <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/40"></div>
+
+          <!-- Text Overlay - Top Left -->
+          <div class="absolute top-[36px] left-[32px] right-[32px] z-10">
+            <!-- Badge -->
+            <div class="inline-block mb-[24px]">
+              <span class="text-xs lg:text-sm font-semibold uppercase tracking-wider text-white/90 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                {{ $card.badge }}
+              </span>
+            </div>
+
+            <!-- Headline -->
+            <h3 class="text-2xl lg:text-3xl font-bold text-white leading-tight drop-shadow-lg max-w-[280px]">
+              {{ $card.title | safeHTML }}
+            </h3>
+
+            <!-- Optional Subheadline -->
+            {{ if $card.subtitle }}
+            <p class="mt-3 text-base lg:text-lg text-white/90 drop-shadow-md max-w-[280px]">
+              {{ $card.subtitle }}
+            </p>
+            {{ end }}
+          </div>
+
+        </div>
+
+      </div>
+      {{ end }}
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows - Visible on ALL screens -->
+  <div class="flex w-full max-w-[1100px] mx-auto px-4 lg:px-8 justify-end gap-3 mt-6">
+    <button id="portrait-slider-prev" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-100 transition-all disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Previous">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button id="portrait-slider-next" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-100 transition-all disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Next">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+</section>
+
+<script>
+  (function() {
+    const slider = document.getElementById('portrait-slider-container');
+    const prevBtn = document.getElementById('portrait-slider-prev');
+    const nextBtn = document.getElementById('portrait-slider-next');
+
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    function updateButtons() {
+      const scrollLeft = slider.scrollLeft;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      prevBtn.disabled = scrollLeft <= 10;
+      nextBtn.disabled = scrollLeft >= maxScroll - 10;
+    }
+
+    function scrollByCard(direction) {
+      const cardWidth = 450 + 30; // Fixed: 450px card + 30px gap
+      const scrollAmount = direction === 'next' ? cardWidth : -cardWidth;
+      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', () => scrollByCard('prev'));
+    nextBtn.addEventListener('click', () => scrollByCard('next'));
+    slider.addEventListener('scroll', updateButtons);
+
+    updateButtons();
+  })();
+</script>

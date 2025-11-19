@@ -1,0 +1,169 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     FEATURES SLIDER - Responsive + Overlay (Desktop)
+     ═══════════════════════════════════════════════════════════════
+     FIXED: Desktop startet an LINKER CONTAINER-KANTE (pink line)
+            Dann scroll nach rechts (overlay)
+     Mobile: Edge-to-edge scroll
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section id="features" class="bg-gray-900 text-white py-20 md:py-32">
+
+  <!-- Section Header (in Container) -->
+  <div class="container-puzh mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+      {{ .Params.features.headline | default "Built Different" }}
+    </h2>
+    <p class="text-base md:text-xl text-center text-gray-300 max-w-2xl mx-auto">
+      {{ .Params.features.subheadline | default "Not another to-do app. A complete operating system for your brain." }}
+    </p>
+  </div>
+
+  <!-- SLIDER Container - Overlay Style (starts LEFT-aligned) -->
+  <div class="relative">
+    <div class="w-full overflow-x-auto scrollbar-hide" id="features-slider">
+      <!-- Inner Flex Container - SPACING DIVS for alignment (NO CSS padding!) -->
+      <div class="flex gap-6 pb-8 px-4 lg:px-0"
+           style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth;">
+
+      <!-- LEFT Spacing (Desktop only) - Aligns first card with container left edge -->
+      <div class="hidden lg:block flex-shrink-0 w-[calc((100vw-1100px)/2)]"></div>
+
+      <!-- Feature Card 1 -->
+      <div class="flex-shrink-0 w-[85vw] md:w-[400px] lg:w-[420px] bg-gray-800 rounded-lg overflow-hidden" style="scroll-snap-align: start;">
+        <!-- GRAUE CARD statt [DUMMY IMAGE] -->
+        <div class="w-full aspect-[4/3] bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="w-16 h-16 mx-auto mb-4 bg-gray-500 rounded-full"></div>
+            <p class="text-gray-400 text-sm">Feature Screenshot</p>
+          </div>
+        </div>
+        <!-- Card Content -->
+        <div class="p-6">
+          <h3 class="text-xl md:text-2xl font-bold mb-3">
+            {{ index .Params.features.cards 0 "title" | default "Capture Everything" }}
+          </h3>
+          <p class="text-gray-300">
+            {{ index .Params.features.cards 0 "description" | default "Photos, voice, text. One tap. Zero friction. Your brain can finally let go." }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Card 2 -->
+      <div class="flex-shrink-0 w-[85vw] md:w-[400px] lg:w-[420px] bg-gray-800 rounded-lg overflow-hidden" style="scroll-snap-align: start;">
+        <div class="w-full aspect-[4/3] bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="w-16 h-16 mx-auto mb-4 bg-gray-500 rounded-full"></div>
+            <p class="text-gray-400 text-sm">Feature Screenshot</p>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl md:text-2xl font-bold mb-3">
+            {{ index .Params.features.cards 1 "title" | default "Intelligent Processing" }}
+          </h3>
+          <p class="text-gray-300">
+            {{ index .Params.features.cards 1 "description" | default "OCR. Auto-tagging. Smart routing. The system thinks so you don't have to." }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Card 3 -->
+      <div class="flex-shrink-0 w-[85vw] md:w-[400px] lg:w-[420px] bg-gray-800 rounded-lg overflow-hidden" style="scroll-snap-align: start;">
+        <div class="w-full aspect-[4/3] bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="w-16 h-16 mx-auto mb-4 bg-gray-500 rounded-full"></div>
+            <p class="text-gray-400 text-sm">Feature Screenshot</p>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl md:text-2xl font-bold mb-3">
+            {{ index .Params.features.cards 2 "title" | default "Flow Workspace" }}
+          </h3>
+          <p class="text-gray-300">
+            {{ index .Params.features.cards 2 "description" | default "Distraction-free. Edge-to-edge. Work feels like art." }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Card 4 -->
+      <div class="flex-shrink-0 w-[85vw] md:w-[400px] lg:w-[420px] bg-gray-800 rounded-lg overflow-hidden" style="scroll-snap-align: start;">
+        <div class="w-full aspect-[4/3] bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="w-16 h-16 mx-auto mb-4 bg-gray-500 rounded-full"></div>
+            <p class="text-gray-400 text-sm">Feature Screenshot</p>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl md:text-2xl font-bold mb-3">
+            {{ index .Params.features.cards 3 "title" | default "Always Synced" }}
+          </h3>
+          <p class="text-gray-300">
+            {{ index .Params.features.cards 3 "description" | default "iPhone. iPad. Mac. Your data, everywhere. Instantly." }}
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT Spacing (Desktop only) - Aligns last card with container right edge -->
+      <div class="hidden lg:block flex-shrink-0 w-[calc((100vw-1100px)/2)]"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows (Desktop only) - Below slider, right-aligned in container -->
+  <div class="hidden lg:flex container-puzh justify-end gap-3 mt-6">
+    <button id="slider-prev" class="w-12 h-12 flex items-center justify-center bg-gray-900 text-white rounded-full hover:bg-gray-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Previous">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button id="slider-next" class="w-12 h-12 flex items-center justify-center bg-gray-900 text-white rounded-full hover:bg-gray-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Next">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scroll Hint (Mobile/iPad only) -->
+  <p class="lg:hidden text-sm text-center text-gray-500 mt-4 px-4">
+    ← Swipe to explore →
+  </p>
+
+  <!-- Slider Navigation JavaScript -->
+  <script>
+    (function() {
+      const slider = document.getElementById('features-slider');
+      const prevBtn = document.getElementById('slider-prev');
+      const nextBtn = document.getElementById('slider-next');
+
+      if (!slider || !prevBtn || !nextBtn) return;
+
+      // Update button states based on scroll position
+      function updateButtons() {
+        const scrollLeft = slider.scrollLeft;
+        const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+        // Disable prev button at start
+        prevBtn.disabled = scrollLeft <= 10;
+
+        // Disable next button at end
+        nextBtn.disabled = scrollLeft >= maxScroll - 10;
+      }
+
+      // Scroll by one card width + gap
+      function scrollByCard(direction) {
+        const cardWidth = 420 + 24; // card width + gap
+        const scrollAmount = direction === 'next' ? cardWidth : -cardWidth;
+        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+
+      // Event listeners
+      prevBtn.addEventListener('click', () => scrollByCard('prev'));
+      nextBtn.addEventListener('click', () => scrollByCard('next'));
+      slider.addEventListener('scroll', updateButtons);
+
+      // Initial state
+      updateButtons();
+    })();
+  </script>
+
+</section>

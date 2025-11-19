@@ -1,0 +1,61 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     ABOUT SECTION - 50/50 Split Layout
+     ═══════════════════════════════════════════════════════════════
+     Left: Text about creator
+     Right: Image/Photo
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section id="about" class="bg-gray-50 dark:bg-gray-950 py-16 md:py-24 transition-colors duration-200">
+  <div class="container-puzh">
+
+    <!-- 2-Column Grid -->
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+
+      <!-- Left Column: Text -->
+      <div class="space-y-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white transition-colors duration-200">
+          {{ if eq .Language.Lang "de" }}
+            {{ .Params.about.headline | default "Über mich" }}
+          {{ else }}
+            {{ .Params.about.headline | default "About Me" }}
+          {{ end }}
+        </h2>
+
+        <div class="prose prose-lg text-gray-600 dark:text-gray-300 space-y-4 transition-colors duration-200">
+          {{ if eq .Language.Lang "de" }}
+            {{ .Params.about.text | default "Ich bin der Schöpfer von PUZH.com – eine App, die aus meinem eigenen Kampf mit Produktivität entstanden ist. Zu viele Tools, zu viel Komplexität, zu wenig Fokus. SNAB ist meine Antwort: radikal einfach, extrem schnell, kompromisslos effektiv." | markdownify }}
+          {{ else }}
+            {{ .Params.about.text | default "I'm the creator of PUZH.com – an app born from my own struggle with productivity. Too many tools, too much complexity, too little focus. SNAB is my answer: radically simple, extremely fast, uncompromisingly effective." | markdownify }}
+          {{ end }}
+        </div>
+
+        <!-- Optional CTA -->
+        {{ if .Params.about.cta_text }}
+        <div class="pt-4">
+          <a href="{{ .Params.about.cta_link | default "#newsletter" }}" class="btn-pill-primary">
+            {{ .Params.about.cta_text }}
+          </a>
+        </div>
+        {{ end }}
+      </div>
+
+      <!-- Right Column: Image -->
+      <div class="flex justify-center items-center">
+        <div class="w-full max-w-md aspect-square bg-gray-200 dark:bg-gray-700 rounded-3xl overflow-hidden shadow-xl transition-colors duration-200">
+          {{ if .Params.about.image }}
+            <img src="{{ .Params.about.image }}" alt="{{ if eq .Language.Lang "de" }}Über mich{{ else }}About Me{{ end }}" class="w-full h-full object-cover">
+          {{ else }}
+            <!-- Placeholder -->
+            <div class="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500 transition-colors duration-200">
+              <svg class="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

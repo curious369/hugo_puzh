@@ -1,0 +1,30 @@
+<section id="final-cta" class="section-container bg-gradient-to-br from-snab-orange to-snab-navy text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl font-bold mb-8">{{ .Params.final_cta.headline }}</h2>
+    <div class="grid md:grid-cols-2 gap-8 mb-16 text-left">
+      <div class="bg-red-900 bg-opacity-50 rounded-xl p-6">{{ .Params.final_cta.left_path | markdownify }}</div>
+      <div class="bg-green-900 bg-opacity-50 rounded-xl p-6">{{ .Params.final_cta.right_path | markdownify }}</div>
+    </div>
+    <h3 class="text-3xl font-bold mb-8">{{ .Params.final_cta.two_paths_headline }}</h3>
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      <div class="card bg-white text-snab-navy">
+        <h4 class="text-2xl font-bold mb-4">{{ .Params.final_cta.path_1_title }}</h4>
+        <div class="prose mb-6">{{ .Params.final_cta.path_1_description | markdownify }}</div>
+        <a href="#masterclass" class="btn-primary bg-snab-orange w-full">{{ .Params.final_cta.path_1_cta }}</a>
+      </div>
+      <div class="card bg-white text-snab-navy">
+        <h4 class="text-2xl font-bold mb-4">{{ .Params.final_cta.path_2_title }}</h4>
+        <div class="prose mb-6">{{ .Params.final_cta.path_2_description | markdownify }}</div>
+        <a href="{{ .Site.Params.appStoreLink }}" class="btn-primary bg-snab-navy w-full">{{ .Params.final_cta.path_2_cta }}</a>
+      </div>
+    </div>
+    <div class="prose prose-xl prose-invert mx-auto mb-12">{{ .Params.final_cta.both_work_headline }}<br>{{ .Params.final_cta.both_work_body | markdownify }}</div>
+    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-white border-opacity-20">
+      <h3 class="text-3xl font-bold mb-4">{{ .Params.final_cta.question_headline }}</h3>
+      <div class="prose prose-lg prose-invert">{{ .Params.final_cta.question_body | markdownify }}</div>
+    </div>
+    <h3 class="text-3xl font-bold mb-4">{{ .Params.final_cta.not_lazy_headline }}</h3>
+    <p class="text-xl mb-4">{{ .Params.final_cta.not_lazy_body }}</p>
+    <p class="text-2xl font-bold">{{ .Params.final_cta.not_lazy_conclusion }}</p>
+  </div>
+</section>

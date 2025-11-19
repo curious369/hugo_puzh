@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ssh root@152.53.184.40 -p 42369)",
+      "Bash(ping:*)",
+      "Bash(ssh -o ConnectTimeout=5 root@152.53.184.40 -p 42369 echo \"connected\")",
+      "Bash(ssh:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

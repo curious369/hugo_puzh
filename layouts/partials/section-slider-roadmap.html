@@ -1,0 +1,169 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     ROADMAP CARD SLIDER - Apple Watch Style
+     ═══════════════════════════════════════════════════════════════
+     Style: Portrait photos with badge + headline overlay
+     Purpose: Showcase roadmap features
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section id="roadmap-slider" class="bg-white dark:bg-gray-950 py-16 md:py-20 transition-colors duration-200">
+
+  <!-- Section Header - EXACT 1100px Container Alignment -->
+  <div class="w-full max-w-[1100px] mx-auto px-8 mb-12">
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-gray-900 dark:text-white transition-colors duration-200">
+      {{ .Params.roadmap_slider.headline | default "Our Secret Roadmap." }}
+    </h2>
+    {{ if .Params.roadmap_slider.subheadline }}
+    <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 transition-colors duration-200">
+      {{ .Params.roadmap_slider.subheadline }}
+    </p>
+    {{ end }}
+  </div>
+
+  <!-- SLIDER Container - Apple Style: Start left, scroll right beyond edge -->
+  <div class="relative w-full overflow-hidden bg-white dark:bg-gray-950 transition-colors duration-200">
+    <div class="w-full overflow-x-auto scrollbar-hide bg-white dark:bg-gray-950 transition-colors duration-200" id="roadmap-slider-container">
+      <div class="flex pb-8 pl-4 pr-4 lg:pl-0 lg:pr-0"
+           style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 30px;">
+
+      <style>
+        @media (min-width: 1024px) {
+          #roadmap-slider-container > div {
+            padding-left: calc((100vw - 1100px) / 2 + 2rem) !important;
+            padding-right: calc((100vw - 1100px) / 2 + 2rem) !important;
+          }
+        }
+      </style>
+
+      <!-- First card aligns with 1100px container left edge -->
+
+      {{ range $index, $card := .Params.roadmap_slider.cards }}
+      <!-- Roadmap Card {{ add $index 1 }} - Apple Style | Mobile: 330x245 | iPad: 490x360 | Desktop: 650x480 -->
+      <div class="flex-shrink-0 bg-white dark:bg-gray-900 overflow-hidden transition-all duration-300 roadmap-card-item" style="scroll-snap-align: start; width: 330px; height: 245px; border-radius: 32px;" onmouseenter="this.style.transform='scale(1.005)'" onmouseleave="this.style.transform='scale(1)'" data-card-index="{{ $index }}">
+
+      <style>
+        /* iPad/Tablet Breakpoint */
+        @media (min-width: 768px) {
+          #roadmap-slider-container .flex-shrink-0 {
+            width: 490px !important;
+            height: 360px !important;
+            border-radius: 32px !important;
+          }
+        }
+        /* Desktop Breakpoint */
+        @media (min-width: 1024px) {
+          #roadmap-slider-container .flex-shrink-0 {
+            width: 650px !important;
+            height: auto !important;
+            border-radius: 32px !important;
+          }
+        }
+      </style>
+
+        <!-- Image Container with Overlay Text -->
+        <div class="relative w-full h-full">
+
+          <!-- Background Image -->
+          <img
+            src="{{ $card.image }}"
+            alt="{{ $card.title }}"
+            class="w-full h-full object-cover roadmap-card-image"
+            loading="lazy"
+            data-original-src="{{ $card.image }}"
+          />
+
+          <!-- Gradient Overlay for Text Readability -->
+          <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
+
+          <!-- Badge - Top Left -->
+          <div class="absolute top-[20px] lg:top-[36px] left-[32px] right-[32px] z-10">
+            <div class="inline-block">
+              <span class="text-xs lg:text-sm font-semibold uppercase tracking-wider text-white/90 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                {{ $card.badge }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Text Overlay - Bottom Left -->
+          <div class="absolute bottom-[24px] lg:bottom-[48px] left-[32px] right-[32px] z-10">
+            <!-- Headline -->
+            <h3 class="text-3xl lg:text-4xl font-bold text-white leading-tight" style="text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
+              {{ $card.title | safeHTML }}
+            </h3>
+
+            <!-- Optional Subheadline -->
+            {{ if $card.subtitle }}
+            <p class="mt-3 text-base lg:text-lg text-white/90 drop-shadow-md">
+              {{ $card.subtitle }}
+            </p>
+            {{ end }}
+          </div>
+
+        </div>
+
+      </div>
+      {{ end }}
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows - Visible on ALL screens -->
+  <div class="flex w-full max-w-[1100px] mx-auto px-4 lg:px-8 justify-end gap-3 mt-6 relative z-10">
+    <button id="roadmap-slider-prev" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-100 transition-all disabled:opacity-30 disabled:cursor-not-allowed pointer-events-auto" aria-label="Previous">
+      <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button id="roadmap-slider-next" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-100 transition-all disabled:opacity-30 disabled:cursor-not-allowed pointer-events-auto" aria-label="Next">
+      <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+</section>
+
+<script>
+  (function() {
+    // RANDOM IMAGE ROTATION FOR CARD #2 (Wear Your Reps)
+    const card2 = document.querySelector('.roadmap-card-item[data-card-index="1"]');
+    if (card2) {
+      const img = card2.querySelector('.roadmap-card-image');
+      const randomImage = Math.random() < 0.5 ? 'puzh_secret_slider_013.webp' : 'puzh_secret_slider_013-2.webp';
+      img.src = `/images/${randomImage}`;
+      console.log('Secret Roadmap Card #2 - Random Image:', randomImage);
+    }
+
+    // SLIDER NAVIGATION
+    const slider = document.getElementById('roadmap-slider-container');
+    const prevBtn = document.getElementById('roadmap-slider-prev');
+    const nextBtn = document.getElementById('roadmap-slider-next');
+
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    function updateButtons() {
+      const scrollLeft = slider.scrollLeft;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      prevBtn.disabled = scrollLeft <= 10;
+      nextBtn.disabled = scrollLeft >= maxScroll - 10;
+    }
+
+    function scrollByCard(direction) {
+      // Responsive card width + gap
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      const cardWidth = isMobile ? 330 : (isTablet ? 490 : 650);
+      const gap = 30;
+      const scrollAmount = direction === 'next' ? (cardWidth + gap) : -(cardWidth + gap);
+      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      setTimeout(updateButtons, 400);
+    }
+
+    prevBtn.addEventListener('click', () => scrollByCard('prev'));
+    nextBtn.addEventListener('click', () => scrollByCard('next'));
+    slider.addEventListener('scroll', updateButtons);
+
+    // Initial update after images load
+    setTimeout(updateButtons, 100);
+  })();
+</script>

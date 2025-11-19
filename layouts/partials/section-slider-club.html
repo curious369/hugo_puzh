@@ -1,0 +1,132 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     SLIDER 4: THE PUSH-UP CLUB - Community & Belonging
+     ═══════════════════════════════════════════════════════════════
+     Framework: Maslow Belonging + Cialdini Social Proof + Sympatheia
+     Style: Warm theme (amber/orange accents), Image-based cards
+     Purpose: Build tribe identity, social motivation
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section id="club-slider" class="bg-gradient-to-b from-amber-50 to-orange-50 text-gray-900 py-20 md:py-32">
+
+  <!-- Section Header -->
+  <div class="container-puzh mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+      {{ .Params.slider_club.headline | default "The Push-Up Club" }}
+    </h2>
+    <p class="text-base md:text-xl text-center text-gray-700 max-w-2xl mx-auto">
+      {{ .Params.slider_club.subheadline | default "You're not alone. You never were." }}
+    </p>
+  </div>
+
+  <!-- SLIDER Container -->
+  <div class="relative">
+    <div class="w-full overflow-x-auto scrollbar-hide" id="club-slider-container">
+      <div class="flex gap-6 pb-8 px-4 lg:px-0"
+           style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth;">
+
+      <!-- LEFT Spacing -->
+      <div class="hidden lg:block flex-shrink-0 w-[calc((100vw-1100px)/2)]"></div>
+
+      {{ range $index, $card := .Params.slider_club.cards }}
+      <!-- Club Card {{ add $index 1 }} - Community Style -->
+      <div class="flex-shrink-0 min-w-[280px] max-w-[280px] w-[280px] h-[450px] bg-white border-2 border-orange-200 rounded-2xl overflow-hidden hover:border-orange-300 hover:shadow-xl hover:shadow-orange-100 transition-all break-words" style="scroll-snap-align: start;">
+
+        <!-- Community Visual Area -->
+        <div class="w-full aspect-[4/3] bg-gradient-to-br {{ $card.gradient | default "from-orange-400 to-amber-500" }} flex items-center justify-center relative overflow-hidden">
+          <!-- Dot pattern for community feel -->
+          <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, white 10%, transparent 10%); background-size: 20px 20px;"></div>
+
+          <div class="text-center p-8 relative z-10">
+            <div class="text-6xl mb-4 filter drop-shadow-md">{{ $card.icon | default "🤝" }}</div>
+            {{ if $card.stat }}
+            <div class="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
+              <p class="text-white font-bold text-xl">{{ $card.stat }}</p>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+
+        <!-- Card Content -->
+        <div class="p-6 w-full overflow-hidden">
+          <h3 class="text-xl md:text-2xl font-bold mb-3">
+            {{ $card.title }}
+          </h3>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            {{ $card.description }}
+          </p>
+
+          <!-- Social Proof Element -->
+          {{ if $card.social_proof }}
+          <div class="flex items-center gap-2 pt-4 border-t border-orange-100">
+            <div class="flex -space-x-2">
+              <!-- Avatar placeholders -->
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-red-400 border-2 border-white"></div>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 border-2 border-white"></div>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-amber-400 border-2 border-white"></div>
+            </div>
+            <p class="text-sm text-gray-600 font-medium">
+              {{ $card.social_proof }}
+            </p>
+          </div>
+          {{ end }}
+        </div>
+
+      </div>
+      {{ end }}
+
+      <!-- RIGHT Spacing -->
+      <div class="hidden lg:block flex-shrink-0 w-[calc((100vw-1100px)/2)]"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <div class="hidden lg:flex container-puzh justify-end gap-3 mt-6">
+    <button id="club-slider-prev" class="w-12 h-12 flex items-center justify-center bg-white text-orange-600 border-2 border-orange-200 rounded-full hover:bg-orange-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Previous">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button id="club-slider-next" class="w-12 h-12 flex items-center justify-center bg-white text-orange-600 border-2 border-orange-200 rounded-full hover:bg-orange-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Next">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scroll Hint -->
+  <p class="lg:hidden text-sm text-center text-gray-600 mt-4 px-4">
+    ← Join the movement →
+  </p>
+
+</section>
+
+<script>
+  (function() {
+    const slider = document.getElementById('club-slider-container');
+    const prevBtn = document.getElementById('club-slider-prev');
+    const nextBtn = document.getElementById('club-slider-next');
+
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    function updateButtons() {
+      const scrollLeft = slider.scrollLeft;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      prevBtn.disabled = scrollLeft <= 10;
+      nextBtn.disabled = scrollLeft >= maxScroll - 10;
+    }
+
+    function scrollByCard(direction) {
+      const cardWidth = 280 + 24;
+      const scrollAmount = direction === 'next' ? cardWidth : -cardWidth;
+      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', () => scrollByCard('prev'));
+    nextBtn.addEventListener('click', () => scrollByCard('next'));
+    slider.addEventListener('scroll', updateButtons);
+
+    updateButtons();
+  })();
+</script>

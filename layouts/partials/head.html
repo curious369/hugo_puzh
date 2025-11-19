@@ -1,0 +1,39 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>{{ if .Params.seo.title }}{{ .Params.seo.title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ if .Params.seo.description }}{{ .Params.seo.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="keywords" content="{{ if .Params.seo.keywords }}{{ .Params.seo.keywords }}{{ end }}">
+  <meta name="author" content="{{ .Site.Params.author }}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ if .Params.seo.title }}{{ .Params.seo.title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:description" content="{{ if .Params.seo.description }}{{ .Params.seo.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:image" content="{{ .Site.BaseURL }}/images/og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ .Permalink }}">
+  <meta property="twitter:title" content="{{ if .Params.seo.title }}{{ .Params.seo.title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="twitter:description" content="{{ if .Params.seo.description }}{{ .Params.seo.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="twitter:image" content="{{ .Site.BaseURL }}/images/og-image.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Analytics (optional - [TBD]) -->
+  <!-- [TBD: Add analytics code here] -->
+</head>

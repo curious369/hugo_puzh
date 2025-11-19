@@ -1,0 +1,590 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER - monninghoff.com Design
+     ═══════════════════════════════════════════════════════════════
+     - Facebook/Google Disclaimer
+     - Zeile 1: © Year + Mental Asset + Kreated with ♡ + DE Flag
+     - Zeile 2: Links (Legal) + Rechts (Language Switcher)
+     ═══════════════════════════════════════════════════════════════ -->
+
+
+<footer id="footer" class="bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-400 pb-4 transition-colors duration-200" style="padding-top: 4rem;">
+  <div class="max-w-[980px] mx-auto px-4 text-sm space-y-4">
+
+    <!-- Facebook Disclaimer -->
+    <p>
+      This site is not a part of the Facebook™ website or Facebook™ Inc. Additionally, this site is NOT endorsed by Facebook™ in any way. Facebook™ is a trademark of Facebook™, Inc.
+    </p>
+
+    <!-- Google Disclaimer -->
+    <p>
+      This site is not a part of the Google™ website or Google™ Inc. Additionally, This site is NOT endorsed by Google™ in any way. Google™ is a trademark of Google™, Inc.
+    </p>
+
+    <!-- Border -->
+    <div class="border-t border-gray-200 pt-4 text-left text-sm">
+
+      <!-- Zeile 1: Copyright + Mental Asset + Kreated with Love + DE Flag + Light/Dark Toggle (Desktop only) -->
+      <div class="flex items-center justify-between">
+        <div>
+          © {{ now.Format "2006" }} <span class="font-semibold">PUZH</span> is a Mental Asset of <a href="https://monninghoff.com" target="_blank" class="font-semibold hover:text-[#007aff] transition-colors" style="text-decoration: none;">MONNINGHOFF Labs</a> &nbsp; | &nbsp;
+          Kreated with <span class="text-red-500">♡</span> in Friedensstadt Münster
+          <span class="flag-de"><div></div></span>
+        </div>
+
+        <!-- Dark Mode Toggle (Desktop only) -->
+        <label class="switch ml-4 flex-shrink-0 desktop-only-toggle">
+          <input class="switch__input" id="darkModeToggle" type="checkbox" role="switch" />
+          <span class="switch__icon">
+            <span class="switch__icon-part switch__icon-part--1"></span>
+            <span class="switch__icon-part switch__icon-part--2"></span>
+            <span class="switch__icon-part switch__icon-part--3"></span>
+            <span class="switch__icon-part switch__icon-part--4"></span>
+            <span class="switch__icon-part switch__icon-part--5"></span>
+            <span class="switch__icon-part switch__icon-part--6"></span>
+            <span class="switch__icon-part switch__icon-part--7"></span>
+            <span class="switch__icon-part switch__icon-part--8"></span>
+            <span class="switch__icon-part switch__icon-part--9"></span>
+            <span class="switch__icon-part switch__icon-part--10"></span>
+            <span class="switch__icon-part switch__icon-part--11"></span>
+          </span>
+        </label>
+      </div>
+
+      <!-- Zeile 2: Legal Links + Language Toggle (Desktop) -->
+      <div class="flex items-center justify-between">
+        <!-- Legal Links -->
+        {{ $current := .RelPermalink }}
+        <div>
+          {{ if eq .Language.Lang "de" }}
+            <a href="/de/datenschutz" class="{{ if strings.HasPrefix $current "/de/datenschutz" }}text-[#007aff]{{ else }}hover:text-[#007aff]{{ end }}">Datenschutzrichtlinie</a> &nbsp; | &nbsp;
+            <a href="/de/cookies" class="{{ if strings.HasPrefix $current "/de/cookies" }}text-[#007aff]{{ else }}hover:text-[#007aff]{{ end }}">Verwendung von Cookies</a> &nbsp; | &nbsp;
+            <a href="/de/impressum" class="{{ if strings.HasPrefix $current "/de/impressum" }}text-[#007aff]{{ else }}hover:text-[#007aff]{{ end }}">Impressum</a>
+          {{ else }}
+            <a href="/privacy" class="{{ if strings.HasPrefix $current "/privacy" }}text-[#007aff]{{ else }}hover:text-[#007aff]{{ end }}">Privacy Policy</a> &nbsp; | &nbsp;
+            <a href="/cookies" class="{{ if and (strings.Contains $current "/cookies") (not (strings.HasPrefix $current "/de/")) }}text-[#007aff]{{ else }}hover:text-[#007aff]{{ end }}">Use of Cookies</a> &nbsp; | &nbsp;
+            <a href="/imprint" class="{{ if strings.HasPrefix $current "/imprint" }}text-[#007aff]{{ else }}hover:text-[#007aff]{{ end }}">Imprint</a>
+          {{ end }}
+        </div>
+
+        <!-- Language Toggle (Desktop only) -->
+        <div class="hidden md:flex ml-4 flex-shrink-0">
+          <div class="lang-switch">
+            <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox" {{ if eq .Language.Lang "de" }}checked{{ end }}>
+            <label for="language-toggle">
+              <span class="lang-label-en">EN</span>
+              <span class="lang-label-de">DE</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zeile 3 (Mobile only): Beide Toggles linksbündig -->
+      <div class="flex items-center gap-4 md:hidden mt-2">
+        <!-- Dark Mode Toggle (Mobile) -->
+        <div class="flex-shrink-0">
+          <label class="switch">
+            <input class="switch__input" id="darkModeToggleMobile" type="checkbox" role="switch" />
+            <span class="switch__icon">
+              <span class="switch__icon-part switch__icon-part--1"></span>
+              <span class="switch__icon-part switch__icon-part--2"></span>
+              <span class="switch__icon-part switch__icon-part--3"></span>
+              <span class="switch__icon-part switch__icon-part--4"></span>
+              <span class="switch__icon-part switch__icon-part--5"></span>
+              <span class="switch__icon-part switch__icon-part--6"></span>
+              <span class="switch__icon-part switch__icon-part--7"></span>
+              <span class="switch__icon-part switch__icon-part--8"></span>
+              <span class="switch__icon-part switch__icon-part--9"></span>
+              <span class="switch__icon-part switch__icon-part--10"></span>
+              <span class="switch__icon-part switch__icon-part--11"></span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Language Toggle (Mobile) -->
+        <div class="flex-shrink-0">
+          <div class="lang-switch">
+            <input id="language-toggle-mobile" class="check-toggle check-toggle-round-flat" type="checkbox" {{ if eq .Language.Lang "de" }}checked{{ end }}>
+            <label for="language-toggle-mobile">
+              <span class="lang-label-en">EN</span>
+              <span class="lang-label-de">DE</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* German Flag */
+  .flag-de {
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: 0.18em;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+    margin-left: 0.15em;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background: none;
+  }
+
+  .flag-de::before,
+  .flag-de::after,
+  .flag-de div {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 33.3333%;
+  }
+
+  .flag-de::before {
+    top: 0;
+    background: black;
+  }
+
+  .flag-de div {
+    top: 33.3333%;
+    background: red;
+  }
+
+  .flag-de::after {
+    top: 66.6666%;
+    background: gold;
+  }
+
+  /* Dark Mode Toggle - Morphing Sun/Moon (14px height) */
+  .switch,
+  .switch__input {
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .switch {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0; /* Ensure consistent alignment */
+  }
+
+  .switch__input,
+  .switch__input:before {
+    background-color: hsl(0, 0%, 10%); /* Dark background for light mode */
+  }
+
+  .switch__input {
+    border-radius: 7px; /* 14px / 2 */
+    cursor: pointer;
+    display: block;
+    width: 28px; /* 2:1 ratio */
+    height: 14px;
+    transition: background-color 0.4s cubic-bezier(0.65,0,0.35,1);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .switch__input:before {
+    border-radius: 50%;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 1.16px; /* scaled from 0.125em */
+    left: 1.16px;
+    width: 11.67px; /* scaled from 1.25em */
+    height: 11.67px;
+    transition:
+      background-color 0.4s cubic-bezier(0.65,0,0.35,1),
+      transform 0.4s cubic-bezier(0.65,0,0.35,1);
+  }
+
+  .switch__icon,
+  .switch__icon-part {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .switch__icon {
+    background-color: hsl(0, 0%, 90%); /* Light background for sun/moon */
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    top: 1.16px;
+    left: 1.16px;
+    width: 11.67px;
+    height: 11.67px;
+    transition: transform 0.4s cubic-bezier(0.65,0,0.35,1);
+  }
+
+  .switch__icon-part {
+    transition:
+      box-shadow 0.4s cubic-bezier(0.65,0,0.35,1),
+      transform 0.4s cubic-bezier(0.65,0,0.35,1);
+  }
+
+  .switch__icon-part--1,
+  .switch__icon-part--2,
+  .switch__icon-part--3 {
+    border-radius: 50%;
+  }
+
+  /* Part 1: Inner sun circle */
+  .switch__icon-part--1 {
+    background-color: hsl(0, 0%, 90%);
+    top: calc(50% - 3.5px);
+    left: calc(50% - 3.5px);
+    width: 7px;
+    height: 7px;
+  }
+
+  /* Part 2: Moon crescent (dark blue) */
+  .switch__icon-part--2 {
+    background-color: #1a202c;
+    top: calc(50% - 4.08px);
+    left: calc(50% - 0.58px);
+    width: 4.67px;
+    height: 4.67px;
+    transform: translate(-1.75px, 1.75px) scale(0.2);
+  }
+
+  /* Part 3: Ring effect */
+  .switch__icon-part--3 {
+    box-shadow: 0 0 0 5.83px hsl(0, 0%, 10%) inset;
+    width: 11.67px;
+    height: 11.67px;
+    transform: scale(0.25);
+  }
+
+  /* Parts 4-11: Sun rays */
+  .switch__icon-part--3 ~ .switch__icon-part {
+    background-color: hsl(0, 0%, 10%);
+    border-radius: 0.58px; /* scaled from 0.0625em */
+    top: 50%;
+    left: 50%;
+    width: 1.17px; /* scaled from 0.125em */
+    height: 1.75px; /* scaled from 0.1875em */
+    transform-origin: 50% 0;
+  }
+
+  .switch__icon-part--4 {
+    transform: translateX(-50%) rotate(0deg) translateY(2.33px); /* scaled from 0.25em */
+  }
+  .switch__icon-part--5 {
+    transform: translateX(-50%) rotate(45deg) translateY(2.33px);
+  }
+  .switch__icon-part--6 {
+    transform: translateX(-50%) rotate(90deg) translateY(2.33px);
+  }
+  .switch__icon-part--7 {
+    transform: translateX(-50%) rotate(135deg) translateY(2.33px);
+  }
+  .switch__icon-part--8 {
+    transform: translateX(-50%) rotate(180deg) translateY(2.33px);
+  }
+  .switch__icon-part--9 {
+    transform: translateX(-50%) rotate(225deg) translateY(2.33px);
+  }
+  .switch__icon-part--10 {
+    transform: translateX(-50%) rotate(270deg) translateY(2.33px);
+  }
+  .switch__icon-part--11 {
+    transform: translateX(-50%) rotate(315deg) translateY(2.33px);
+  }
+
+  /* CHECKED STATE - Dark Mode */
+  .switch__input:checked {
+    background-color: hsl(0, 0%, 90%); /* Light background for dark mode */
+  }
+
+  .switch__input:checked:before {
+    transform: translateX(14px); /* scaled from 1.5em */
+  }
+
+  .switch__input:checked ~ .switch__icon {
+    transform: translateX(14px);
+    background-color: hsl(0, 0%, 10%); /* Dark circle for crescent moon */
+  }
+
+  .switch__input:checked ~ .switch__icon .switch__icon-part--2 {
+    transform: translate(0, 0) scale(1);
+  }
+
+  .switch__input:checked ~ .switch__icon .switch__icon-part--3 {
+    box-shadow: 0 0 0 2.33px hsl(0, 0%, 10%) inset;
+    transform: scale(1);
+  }
+
+  .switch__input:checked ~ .switch__icon .switch__icon-part--4 {
+    transform: translateX(-50%) rotate(0deg) translateY(5.83px) scale(0); /* scaled from 0.625em */
+  }
+  .switch__input:checked ~ .switch__icon .switch__icon-part--5 {
+    transform: translateX(-50%) rotate(45deg) translateY(5.83px) scale(0);
+  }
+  .switch__input:checked ~ .switch__icon .switch__icon-part--6 {
+    transform: translateX(-50%) rotate(90deg) translateY(5.83px) scale(0);
+  }
+  .switch__input:checked ~ .switch__icon .switch__icon-part--7 {
+    transform: translateX(-50%) rotate(135deg) translateY(5.83px) scale(0);
+  }
+  .switch__input:checked ~ .switch__icon .switch__icon-part--8 {
+    transform: translateX(-50%) rotate(180deg) translateY(5.83px) scale(0);
+  }
+  .switch__input:checked ~ .switch__icon .switch__icon-part--9 {
+    transform: translateX(-50%) rotate(225deg) translateY(5.83px) scale(0);
+  }
+  .switch__input:checked ~ .switch__icon .switch__icon-part--10 {
+    transform: translateX(-50%) rotate(270deg) translateY(5.83px) scale(0);
+  }
+  .switch__input:checked ~ .switch__icon .switch__icon-part--11 {
+    transform: translateX(-50%) rotate(315deg) translateY(5.83px) scale(0);
+  }
+
+  /* Language Toggle Switch with CSS Flags in Circle */
+  .lang-switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0; /* Ensure consistent alignment */
+  }
+
+  .check-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+  }
+
+  .check-toggle + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+  }
+
+  input.check-toggle-round-flat + label {
+    padding: 1.16px;
+    width: 44px; /* Noch schmaler - weniger Abstand EN/DE */
+    height: 14px;
+    background-color: #9CA3AF; /* Gray background */
+    border-radius: 7px;
+    transition: background-color 0.2s;
+    position: relative;
+  }
+
+  input.check-toggle-round-flat + label:before,
+  input.check-toggle-round-flat + label:after {
+    display: block;
+    position: absolute;
+    content: "";
+  }
+
+  input.check-toggle-round-flat + label:before {
+    top: 1.16px;
+    left: 1.16px;
+    bottom: 1.16px;
+    right: 1.16px;
+    background-color: #9CA3AF; /* Gray background */
+    border-radius: 7px; /* Same as dark mode */
+  }
+
+  /* EN Label (links im Toggle) */
+  .lang-label-en {
+    position: absolute;
+    top: 50%;
+    left: 7px; /* Mittig im schwarzen Schalter */
+    transform: translateY(-50%);
+    font-size: 8px;
+    font-weight: 400; /* NICHT fett */
+    color: #6B7280; /* Gray - inaktiv */
+    pointer-events: none;
+    z-index: 3; /* ÜBER dem schwarzen Slider! */
+    transition: color 0.2s;
+  }
+
+  /* DE Label (rechts im Toggle) */
+  .lang-label-de {
+    position: absolute;
+    top: 50%;
+    right: 7px; /* Mittig in seiner rechten Position */
+    transform: translateY(-50%);
+    font-size: 8px;
+    font-weight: 400; /* NICHT fett */
+    color: #6B7280; /* Gray - inaktiv */
+    pointer-events: none;
+    z-index: 3; /* ÜBER dem schwarzen Slider! */
+    transition: color 0.2s;
+  }
+
+  /* Wenn EN aktiv (unchecked): BEIDE EN + DE werden weiß (auf schwarzem Schalter lesbar) */
+  input.check-toggle-round-flat + label .lang-label-en,
+  input.check-toggle-round-flat + label .lang-label-de {
+    color: white;
+  }
+
+  /* Wenn DE aktiv (checked): BEIDE Labels bleiben weiß */
+  input.check-toggle-round-flat:checked + label .lang-label-en,
+  input.check-toggle-round-flat:checked + label .lang-label-de {
+    color: white;
+  }
+
+  /* Black oval slider - startet auf EN (links) */
+  input.check-toggle-round-flat + label:after {
+    top: 1.16px;
+    left: 1.16px;
+    width: 22px; /* Oval für Text - kleiner wegen schmalerer Toggle */
+    height: 11.67px;
+    border-radius: 12px; /* Oval shape */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    transition: margin 0.2s cubic-bezier(0.65,0,0.35,1);
+    background: #000000; /* BLACK slider */
+    z-index: 2;
+  }
+
+  /* Slider moves right auf DE (checked) */
+  input.check-toggle-round-flat:checked + label:after {
+    margin-left: calc(44px - 22px - 1.16px - 1.16px);
+  }
+
+  /* Dark mode - keep same gray */
+  .dark input.check-toggle-round-flat + label,
+  .dark input.check-toggle-round-flat + label:before {
+    background-color: #6B7280; /* Slightly darker gray for dark mode */
+  }
+
+  /* Desktop-only Toggle: Hidden on Mobile, Visible on Desktop */
+  .desktop-only-toggle {
+    display: none; /* Hidden on mobile */
+  }
+
+  @media (min-width: 768px) {
+    .desktop-only-toggle {
+      display: flex !important; /* Visible on desktop */
+    }
+  }
+</style>
+
+<script>
+  // Dark Mode Toggle with localStorage & System Preference (Desktop + Mobile sync)
+  document.addEventListener('DOMContentLoaded', function() {
+    const html = document.documentElement;
+    const toggleDesktop = document.getElementById('darkModeToggle');
+    const toggleMobile = document.getElementById('darkModeToggleMobile');
+
+    // Check localStorage or system preference
+    function getInitialTheme() {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored;
+
+      // Check system preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      return 'light';
+    }
+
+    // Apply theme to both toggles
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        html.classList.add('dark');
+        if (toggleDesktop) toggleDesktop.checked = true;
+        if (toggleMobile) toggleMobile.checked = true;
+      } else {
+        html.classList.remove('dark');
+        if (toggleDesktop) toggleDesktop.checked = false;
+        if (toggleMobile) toggleMobile.checked = false;
+      }
+      localStorage.setItem('theme', theme);
+    }
+
+    // Initialize
+    const initialTheme = getInitialTheme();
+    applyTheme(initialTheme);
+
+    // Desktop Toggle on change
+    if (toggleDesktop) {
+      toggleDesktop.addEventListener('change', function() {
+        const newTheme = this.checked ? 'dark' : 'light';
+        applyTheme(newTheme);
+      });
+    }
+
+    // Mobile Toggle on change
+    if (toggleMobile) {
+      toggleMobile.addEventListener('change', function() {
+        const newTheme = this.checked ? 'dark' : 'light';
+        applyTheme(newTheme);
+      });
+    }
+
+    // Listen to system preference changes
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    }
+  });
+
+  // Language Toggle (Desktop + Mobile sync) - Context-Aware
+  document.addEventListener('DOMContentLoaded', function() {
+    const langToggleDesktop = document.getElementById('language-toggle');
+    const langToggleMobile = document.getElementById('language-toggle-mobile');
+    const currentLang = '{{ .Language.Lang }}';
+    const currentPath = window.location.pathname;
+
+    function switchLanguage(checked) {
+      let targetUrl = '/#footer';
+
+      if (checked) {
+        // Switch to German
+        if (currentPath === '/imprint' || currentPath === '/imprint/') {
+          targetUrl = '/de/impressum/#footer';
+        } else if (currentPath === '/privacy' || currentPath === '/privacy/') {
+          targetUrl = '/de/datenschutz/#footer';
+        } else if (currentPath === '/cookies' || currentPath === '/cookies/') {
+          targetUrl = '/de/cookies/#footer';
+        } else {
+          targetUrl = '/de/#footer';
+        }
+      } else {
+        // Switch to English
+        if (currentPath.includes('/impressum')) {
+          targetUrl = '/imprint/#footer';
+        } else if (currentPath.includes('/datenschutz')) {
+          targetUrl = '/privacy/#footer';
+        } else if (currentPath.includes('/cookies')) {
+          targetUrl = '/cookies/#footer';
+        } else {
+          targetUrl = '/#footer';
+        }
+      }
+
+      window.location.href = targetUrl;
+    }
+
+    if (langToggleDesktop) {
+      langToggleDesktop.addEventListener('change', function() {
+        switchLanguage(this.checked);
+      });
+    }
+
+    if (langToggleMobile) {
+      langToggleMobile.addEventListener('change', function() {
+        switchLanguage(this.checked);
+      });
+    }
+
+    // Smooth scroll to footer if hash is present after page load
+    if (window.location.hash === '#footer') {
+      setTimeout(function() {
+        document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  });
+</script>

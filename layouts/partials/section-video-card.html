@@ -1,0 +1,105 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     VIDEO CARD SECTION - Apple-Style Video Showcase
+     ═══════════════════════════════════════════════════════════════
+     Large rounded card with video, play/pause control
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section class="bg-gray-900 py-16 md:py-20">
+  <div class="container-puzh px-4">
+
+    <!-- Section Header -->
+    <div class="w-full max-w-6xl mx-auto mb-12">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-white">
+        {{ if eq .Language.Lang "de" }}PUZH.App bald.{{ else }}PUZH.App soon.{{ end }}
+      </h2>
+      <p class="text-2xl lg:text-3xl font-bold text-white/80">
+        {{ if eq .Language.Lang "de" }}Zuerst im App Store für iPhone. Arbeiten am Launch.{{ else }}First on App Store for iPhone. Working hard on the launch.{{ end }}
+      </p>
+    </div>
+
+    <!-- Video Card Container - Apple-Style -->
+    <div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 shadow-2xl" style="border-radius: 32px;">
+
+      <!-- Video Element -->
+      <div class="relative w-full bg-black" style="height: 800px;">
+        <video
+          id="promo-video"
+          class="w-full h-full object-cover"
+          style="object-position: center bottom;"
+          poster="/videos/puzh-loop-poster.jpg"
+          preload="auto"
+          controls
+          loop
+          autoplay
+          muted
+          playsinline
+        >
+          <source src="/videos/puzh-loop.mp4" type="video/mp4">
+          Dein Browser unterstützt das Video-Element nicht.
+        </video>
+
+        <!-- Play/Pause Button Overlay -->
+        <button
+          id="video-play-btn"
+          class="absolute top-4 right-4 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300 z-10 group"
+          aria-label="Video abspielen/pausieren"
+        >
+          <!-- Pause Icon (shown when playing) -->
+          <svg id="pause-icon" class="w-6 h-6 md:w-7 md:h-7 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect x="6" y="4" width="4" height="16" fill="currentColor"></rect>
+            <rect x="14" y="4" width="4" height="16" fill="currentColor"></rect>
+          </svg>
+          <!-- Play Icon (shown when paused) -->
+          <svg id="play-icon" class="w-6 h-6 md:w-7 md:h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+
+        <!-- Click anywhere to toggle (optional) -->
+        <div class="absolute inset-0 cursor-pointer" id="video-overlay"></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Video Control Script -->
+<script>
+(function() {
+  const video = document.getElementById('promo-video');
+  const playBtn = document.getElementById('video-play-btn');
+  const playIcon = document.getElementById('play-icon');
+  const pauseIcon = document.getElementById('pause-icon');
+  const overlay = document.getElementById('video-overlay');
+
+  if (!video || !playBtn) return;
+
+  function togglePlayPause() {
+    if (video.paused) {
+      video.play();
+      playIcon.classList.add('hidden');
+      pauseIcon.classList.remove('hidden');
+    } else {
+      video.pause();
+      playIcon.classList.remove('hidden');
+      pauseIcon.classList.add('hidden');
+    }
+  }
+
+  // Button click
+  playBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    togglePlayPause();
+  });
+
+  // Overlay click (anywhere on video)
+  overlay.addEventListener('click', togglePlayPause);
+
+  // Update button when video ends
+  video.addEventListener('ended', () => {
+    playIcon.classList.remove('hidden');
+    pauseIcon.classList.add('hidden');
+  });
+})();
+</script>

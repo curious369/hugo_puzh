@@ -1,0 +1,74 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     FOUNDER SECTION - From Zero to PUZH
+     ═══════════════════════════════════════════════════════════════
+     50/50 Card: Text Left, Photo Right
+     Rounded corners (32px)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section class="bg-white dark:bg-gray-950 py-16 md:py-20 transition-colors duration-200">
+  <div class="container-puzh">
+
+    <!-- Main Card: 50/50 Split -->
+    <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8">
+
+      <!-- Headline Above Card -->
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900 dark:text-white transition-colors duration-200">
+        {{ .Params.founder.headline | default "From Zero to PUZH" }}
+      </h2>
+      {{ if .Params.founder.subheadline }}
+      <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 mb-8">
+        {{ .Params.founder.subheadline }}
+      </p>
+      {{ end }}
+
+      <!-- Card with Rounded Corners -->
+      <div class="grid md:grid-cols-2 gap-8 transition-colors duration-200">
+
+        <!-- Left: Text Content -->
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-3xl p-8 md:p-12 flex flex-col justify-center">
+
+          <!-- Full Text Content -->
+          <div class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 space-y-6">
+            {{ .Params.founder.bio | markdownify }}
+
+            <p>
+              {{ .Params.founder.closing | default "You are one push-up away from your new identity." }}
+            </p>
+
+            <p>
+              {{ .Params.founder.signature | default "Dein Chris" }}<br>
+              <span class="text-xl lg:text-2xl">
+                {{ .Params.founder.title | default "Founder PUZH.app und SNAB.app" | markdownify }}
+              </span>
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Right: Photo with Badges -->
+        <div class="relative h-[500px] md:h-auto rounded-3xl overflow-hidden">
+          <img
+            src="{{ .Params.founder.image | default "/images/puzh_portrait_slider_001.webp" }}"
+            alt="{{ .Params.founder.headline }}"
+            class="w-full h-full object-cover"
+          >
+
+          <!-- Badges - Top Right (like slider badges) -->
+          <div class="absolute top-[36px] right-[32px] z-10 flex flex-col gap-2 items-end">
+            <!-- Badge: SoloKreator -->
+            <span class="inline-block text-xs lg:text-sm font-semibold uppercase tracking-wider text-white/90 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+              SoloKreator
+            </span>
+            <!-- Badge: Dad -->
+            <span class="inline-block text-xs lg:text-sm font-semibold uppercase tracking-wider text-white/90 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+              Dad
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

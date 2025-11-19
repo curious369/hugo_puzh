@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-200">
+
+  <!-- Header -->
+  {{ partial "header.html" . }}
+
+  <!-- Legal Sub-Navigation mit Fixed Wrapper (wie monninghoff-hugo) -->
+  {{ $current := .RelPermalink }}
+  {{ $isLegalPage := or (strings.HasPrefix $current "/de/impressum") (strings.HasPrefix $current "/de/datenschutz") (strings.HasPrefix $current "/de/cookies") (strings.HasPrefix $current "/imprint") (strings.HasPrefix $current "/privacy") (strings.Contains $current "/cookies") }}
+
+  {{ if $isLegalPage }}
+  <!-- Fixed Wrapper für Subheader mit grauem Background und hohem z-index -->
+  <div style="position: fixed; top: 64px; left: 0; width: 100%; height: 50px; z-index: 9998; will-change: transform; transform: translateZ(0);" class="bg-gray-200 dark:bg-gray-800">
+    {{ partial "legal-subnav.html" . }}
+  </div>
+
+  <!-- Spacer: 64px Header + 50px Subheader = 114px -->
+  <div style="height: 114px;"></div>
+  {{ else }}
+  <!-- Spacer nur für Header wenn keine Legal Page -->
+  <div style="height: 64px;"></div>
+  {{ end }}
+
+  <!-- Main Content -->
+  <main class="py-16 md:py-24">
+    <article class="max-w-[980px] mx-auto px-5">
+
+      <!-- Page Title -->
+      <h1 class="text-4xl md:text-5xl font-bold mb-8">{{ .Title }}</h1>
+
+      <!-- Content -->
+      <div class="prose prose-lg dark:prose-invert max-w-none
+                  prose-headings:font-bold
+                  prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+                  prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+                  prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
+                  prose-a:text-[#007aff] prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-gray-900 dark:prose-strong:text-white
+                  prose-ul:list-disc prose-ul:pl-6
+                  prose-li:text-gray-700 dark:prose-li:text-gray-300">
+        {{ .Content }}
+      </div>
+
+      <!-- Back to Home Link -->
+      <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}"
+           class="inline-flex items-center text-[#007aff] hover:underline">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          {{ if eq .Language.Lang "de" }}
+            Zurück zur Startseite
+          {{ else }}
+            Back to Home
+          {{ end }}
+        </a>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  {{ partial "footer.html" . }}
+
+</body>
+</html>

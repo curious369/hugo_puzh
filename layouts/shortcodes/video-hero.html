@@ -1,0 +1,132 @@
+{{/*
+  Video Hero Shortcode - Apple-style video background with custom controls
+  Usage: {{< video-hero src="/videos/pushup-loop.mp4" poster="/images/pushup-poster.jpg" >}}
+*/}}
+
+{{ $src := .Get "src" }}
+{{ $poster := .Get "poster" | default "" }}
+{{ $class := .Get "class" | default "" }}
+
+<div class="video-hero-container {{ $class }}">
+  <video
+    class="video-hero"
+    {{ with $poster }}poster="{{ . }}"{{ end }}
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
+    <source src="{{ $src }}" type="video/mp4">
+    Dein Browser unterstützt das Video-Element nicht.
+  </video>
+
+  <!-- Custom Play/Pause Button -->
+  <button class="video-control-btn" aria-label="Video abspielen/pausieren">
+    <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </svg>
+    <svg class="pause-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="6" y="4" width="4" height="16"></rect>
+      <rect x="14" y="4" width="4" height="16"></rect>
+    </svg>
+  </button>
+</div>
+
+<style>
+.video-hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-hero {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.video-control-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.video-control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.video-control-btn:active {
+  transform: scale(0.95);
+}
+
+.video-control-btn .hidden {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .video-control-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+</style>
+
+<script>
+(function() {
+  const containers = document.querySelectorAll('.video-hero-container');
+
+  containers.forEach(container => {
+    const video = container.querySelector('.video-hero');
+    const btn = container.querySelector('.video-control-btn');
+    const playIcon = btn.querySelector('.play-icon');
+    const pauseIcon = btn.querySelector('.pause-icon');
+
+    // Auto-play on load (muted)
+    video.play().catch(err => {
+      console.log('Autoplay prevented:', err);
+    });
+
+    // Initially show pause icon (since video auto-plays)
+    playIcon.classList.add('hidden');
+    pauseIcon.classList.remove('hidden');
+
+    // Toggle play/pause
+    btn.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      } else {
+        video.pause();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      }
+    });
+
+    // Optional: Click on video to toggle
+    video.addEventListener('click', () => {
+      btn.click();
+    });
+  });
+})();
+</script>

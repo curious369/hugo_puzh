@@ -1,0 +1,43 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     HEADER - Responsive (iPhone/iPad/Desktop)
+     ═══════════════════════════════════════════════════════════════
+     iPhone (< 768px): Logo + CTA + Hamburger with Fullscreen Menu
+     iPad (768-1024px): Horizontal nav (compact)
+     Desktop (> 1024px): Full horizontal nav in 1100px container
+     ═══════════════════════════════════════════════════════════════ -->
+
+<header class="fixed top-0 left-0 w-full z-[10000] bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
+  <div class="max-w-[980px] mx-auto px-6 h-16 flex items-center justify-center">
+
+    <!-- Desktop Navigation (> 1024px) - Logo Left + Button Right -->
+    <nav class="hidden lg:flex w-full items-center justify-between">
+      <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="flex items-center">
+        <img src="/images/puzh-logo.svg" alt="PUZH" style="height: 40px; width: auto;" class="dark:invert">
+      </a>
+      <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3" data-header-button>
+        {{ if eq .Language.Lang "de" }}Zur Warteliste{{ else }}Join the Waitlist{{ end }}
+      </a>
+    </nav>
+
+    <!-- iPad Navigation (768-1024px) - Logo Left + Button Right -->
+    <nav class="hidden md:flex lg:hidden w-full items-center justify-between">
+      <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="flex items-center">
+        <img src="/images/puzh-logo.svg" alt="PUZH" style="height: 35px; width: auto;" class="dark:invert">
+      </a>
+      <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3" data-header-button>
+        {{ if eq .Language.Lang "de" }}Zur Warteliste{{ else }}Join the Waitlist{{ end }}
+      </a>
+    </nav>
+
+    <!-- iPhone - Logo + CTA -->
+    <div class="md:hidden flex w-full items-center justify-between">
+      <a href="{{ if eq .Language.Lang "de" }}/de/{{ else }}/{{ end }}" class="flex items-center">
+        <img src="/images/puzh-logo.svg" alt="PUZH" style="height: 28px; width: auto;" class="dark:invert">
+      </a>
+      <a href="#newsletter" class="btn-pill-primary text-sm" data-header-button>
+        {{ if eq .Language.Lang "de" }}Zur Warteliste{{ else }}Join the Waitlist{{ end }}
+      </a>
+    </div>
+
+  </div>
+</header>

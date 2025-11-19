@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="{{ .Lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>{{ .Params.seo.title | default "PUZH - AI-Powered Push-Up Training" }}</title>
+  <meta name="description" content="{{ .Params.seo.description | default "The world's cleanest push-up experience. AI-powered. ML-driven. Coming Q1 2026." }}">
+  <meta name="keywords" content="{{ .Params.seo.keywords | default "push-ups, AI fitness, machine learning workout" }}">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ .Params.seo.title }}">
+  <meta property="og:description" content="{{ .Params.seo.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ .Permalink }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .Params.seo.title }}">
+  <meta name="twitter:description" content="{{ .Params.seo.description }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- CSS -->
+  {{ $styles := resources.Get "css/main.css" | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PUZH - SIMPLE COMING SOON LANDING PAGE
+       ═══════════════════════════════════════════════════════════════
+       Message: "PUZH kommt - AI-powered Push-Ups"
+       Goal: Email capture for waitlist
+       ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Language Banner -->
+  {{ partial "language-banner.html" . }}
+
+  <!-- Header -->
+  {{ partial "header.html" . }}
+
+  <main>
+
+    <!-- HERO: Main Message (A/B/C Variants) -->
+    {{ partial "section-hero.html" . }}
+
+    <!-- SOCIAL PROOF: Waitlist Count -->
+    {{ partial "section-social-proof.html" . }}
+
+    <!-- PORTRAIT SLIDER: Apple-Style Portrait Cards -->
+    {{ partial "section-slider-portrait.html" . }}
+
+    <!-- VIDEO CARD: Promo Video -->
+    {{ partial "section-video-card.html" . }}
+
+    <!-- ROADMAP SLIDER: Secret Roadmap Cards -->
+    {{ partial "section-slider-roadmap.html" . }}
+
+    <!-- INSTAGRAM WALL: Wall of Discipline -->
+    {{ partial "section-instagram-wall.html" . }}
+
+    <!-- FOUNDER: From Zero to PUZH -->
+    {{ partial "section-founder.html" . }}
+
+    <!-- NEWSLETTER: Email Capture -->
+    {{ partial "section-newsletter.html" . }}
+
+  </main>
+
+  <!-- Footer -->
+  {{ partial "footer.html" . }}
+
+  <!-- A/B/C Hero Variant Rotation - NEVER REPEAT PREVIOUS COLOR -->
+  <script>
+    (function() {
+      const variants = document.querySelectorAll('[data-hero-variant]');
+      if (variants.length === 0) return;
+
+      // Color mapping for variants (light & dark mode)
+      const variantColors = {
+        'variant-a': { light: '#000000', dark: '#FFFFFF' }, // BLACK / WHITE
+        'variant-b': { light: '#0066FF', dark: '#1cbf00' }, // BLUE / GREEN
+        'variant-c': { light: '#1cbf00', dark: '#0066FF' }  // GREEN / BLUE
+      };
+
+      // Get all variant names
+      const variantNames = Array.from(variants).map(v => v.dataset.heroVariant);
+
+      // Get previous variant from localStorage
+      const previousVariant = localStorage.getItem('lastHeroVariant');
+
+      // Exclude previous variant from selection (never repeat color!)
+      const availableVariants = previousVariant
+        ? variantNames.filter(name => name !== previousVariant)
+        : variantNames;
+
+      // If somehow all variants are filtered out, use all variants
+      const selectionPool = availableVariants.length > 0 ? availableVariants : variantNames;
+
+      // Select random variant from available pool
+      const selectedVariant = selectionPool[Math.floor(Math.random() * selectionPool.length)];
+
+      // Save selected variant for next time
+      localStorage.setItem('lastHeroVariant', selectedVariant);
+
+      // Show the selected variant
+      variants.forEach((variant) => {
+        variant.style.display = (variant.dataset.heroVariant === selectedVariant) ? 'block' : 'none';
+      });
+
+      // Set variant in newsletter form
+      const variantInput = document.getElementById('newsletter-variant');
+      if (variantInput) {
+        variantInput.value = selectedVariant;
+      }
+
+      // Function to update button colors based on dark mode
+      function updateButtonColors() {
+        const isDarkMode = document.documentElement.classList.contains('dark');
+        const buttonColor = variantColors[selectedVariant]?.[isDarkMode ? 'dark' : 'light'] || '#000000';
+
+        // Text color: Black text ONLY on white button in dark mode, otherwise ALWAYS white
+        const textColor = (isDarkMode && buttonColor === '#FFFFFF') ? '#000000' : '#FFFFFF';
+
+        // Update Hero Button
+        const visibleVariant = document.querySelector(`[data-hero-variant="${selectedVariant}"]`);
+        if (visibleVariant) {
+          const heroButton = visibleVariant.querySelector('.btn-pill-primary');
+          if (heroButton) {
+            heroButton.style.backgroundColor = buttonColor;
+            heroButton.style.setProperty('color', textColor, 'important');
+            heroButton.style.transition = 'opacity 0.2s ease';
+            heroButton.onmouseenter = () => { heroButton.style.opacity = '0.85'; };
+            heroButton.onmouseleave = () => { heroButton.style.opacity = '1'; };
+            console.log('Hero button color set:', buttonColor, isDarkMode ? '(dark)' : '(light)');
+          }
+        }
+
+        // Update Header Buttons (all 3: Desktop/iPad/iPhone)
+        const headerButtons = document.querySelectorAll('[data-header-button]');
+        headerButtons.forEach(btn => {
+          btn.style.backgroundColor = buttonColor;
+          btn.style.setProperty('color', textColor, 'important');
+          btn.style.transition = 'opacity 0.2s ease';
+          btn.onmouseenter = () => { btn.style.opacity = '0.85'; };
+          btn.onmouseleave = () => { btn.style.opacity = '1'; };
+        });
+        console.log('Header buttons color set:', buttonColor, `(${headerButtons.length} buttons)`, isDarkMode ? '(dark)' : '(light)');
+      }
+
+      // Initial button color update
+      updateButtonColors();
+
+      // Listen for dark mode changes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'class') {
+            updateButtonColors();
+          }
+        });
+      });
+
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+
+      console.log('PUZH Variant:', selectedVariant, '| Previous:', previousVariant || 'none', '| Available pool:', selectionPool);
+    })();
+  </script>
+
+</body>
+</html>

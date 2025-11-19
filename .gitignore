@@ -1,0 +1,34 @@
+# Hugo
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Tailwind
+/static/css/main.css
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Env
+.env
+.env.local
+.env.production
+
+# Build
+dist/
+build/

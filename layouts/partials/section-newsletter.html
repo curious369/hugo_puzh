@@ -1,0 +1,409 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     NEWSLETTER SECTION - Double Opt-In with OG Code
+     ═══════════════════════════════════════════════════════════════
+     - AJAX form submission
+     - Green success banner (Apple-style)
+     - Multi-language support (EN/DE)
+     - Integration with Cloudflare Worker
+     - OG Code for early supporters (before 30.11.2025)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section id="newsletter" class="bg-gray-50 dark:bg-gray-900 py-16 md:py-20 transition-colors duration-200">
+  <div class="container-puzh">
+
+    <!-- Section Header - Left Aligned like other sections -->
+    <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8 mb-12">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-gray-900 dark:text-white transition-colors duration-200">
+        {{ .Params.newsletter.headline | default "Be one of the first." }}
+      </h2>
+      <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 transition-colors duration-200">
+        {{ .Params.newsletter.subheadline | default "Limited beta access. Q1 2026." }}
+      </p>
+    </div>
+
+    <!-- 50/50 Grid Layout -->
+    <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+
+        <!-- LEFT SIDE: Logo + Text -->
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-3xl p-8 md:p-12 flex flex-col justify-start transition-colors duration-200">
+
+          <!-- Logo with Color Rotation (same logic as hero section) -->
+          <div class="mb-6 flex justify-start" data-newsletter-logo>
+            <!-- VARIANT A: BLACK/WHITE -->
+            <div data-logo-variant="variant-a" style="display: none;">
+              <img src="/images/logo_puzh_black.svg" alt="PUZH" class="dark:hidden" style="height: 80px; width: auto;">
+              <img src="/images/logo_puzh_white.svg" alt="PUZH" class="hidden dark:block" style="height: 80px; width: auto;">
+            </div>
+            <!-- VARIANT B: BLUE/GREEN -->
+            <div data-logo-variant="variant-b" style="display: none;">
+              <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="dark:hidden" style="height: 80px; width: auto;">
+              <img src="/images/logo_puzh_green.svg" alt="PUZH" class="hidden dark:block" style="height: 80px; width: auto;">
+            </div>
+            <!-- VARIANT C: GREEN/BLUE -->
+            <div data-logo-variant="variant-c" style="display: none;">
+              <img src="/images/logo_puzh_green.svg" alt="PUZH" class="dark:hidden" style="height: 80px; width: auto;">
+              <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="hidden dark:block" style="height: 80px; width: auto;">
+            </div>
+          </div>
+          <style>
+            @media (min-width: 768px) {
+              [data-newsletter-logo] img { height: 120px !important; }
+            }
+            @media (min-width: 1024px) {
+              [data-newsletter-logo] img { height: 192px !important; }
+            }
+          </style>
+
+          <div class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 text-left">
+            {{ if eq .Language.Lang "de" }}
+              <p>Wenn Du bereit bist - sichere dir deinen limitierten OG Platz.</p>
+            {{ else }}
+              <p>If you're ready - claim your limited OG spot.</p>
+            {{ end }}
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE: Newsletter Form -->
+        <div class="bg-gray-50 dark:bg-gray-900 rounded-3xl p-8 md:p-12 flex flex-col justify-center transition-colors duration-200">
+
+          <!-- Form Headline - Same font as left card -->
+          <h3 class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 mb-8">
+            {{ if eq .Language.Lang "de" }}PUZH Letter - Early Member Benefits{{ else }}PUZH Letter - Early Member Benefits{{ end }}
+          </h3>
+
+          <!-- 3 Benefits - Same font as left card -->
+          <ul class="mb-8 space-y-3 text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400">
+            <li class="flex items-start gap-2">
+              <span class="text-gray-900 dark:text-white flex-shrink-0">✓</span>
+              <span>{{ if eq .Language.Lang "de" }}Early Adopter Badge - OG Member Status (lebenslange Anerkennung){{ else }}Early Adopter Badge - OG Member status (lifetime recognition){{ end }}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-gray-900 dark:text-white flex-shrink-0">✓</span>
+              <span>{{ if eq .Language.Lang "de" }}VIP Perks - Exklusive Rabatte & frühe Features{{ else }}VIP Perks - Exclusive discounts & early features{{ end }}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-gray-900 dark:text-white flex-shrink-0">✓</span>
+              <span>{{ if eq .Language.Lang "de" }}Insider Access - Erhalte es vor allen anderen{{ else }}Insider Access - Get it before everyone else{{ end }}</span>
+            </li>
+          </ul>
+
+          <!-- Newsletter Form -->
+          <form id="newsletter-form" class="mb-4">
+
+            <!-- Email Input - Pill Style -->
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              placeholder="{{ if eq .Language.Lang "de" }}deine@email.de{{ else }}your@email.com{{ end }}"
+              required
+              class="w-full px-6 py-4 mb-3 rounded-full font-semibold text-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+            >
+
+            <!-- Hidden Input: Variant Tag (set by JavaScript) -->
+            <input type="hidden" id="newsletter-variant" name="variant" value="unknown">
+
+            <!-- Submit Button - Pill Style (synced with logo color) -->
+            <button
+              type="submit"
+              id="newsletter-submit"
+              class="w-full px-6 py-4 rounded-full font-semibold text-lg text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              data-newsletter-button
+              style="background-color: #000000;">
+              <span id="newsletter-submit-text">{{ .Params.newsletter.cta | default "Join Waitlist" }}</span>
+              <span id="newsletter-submit-loading" class="hidden">
+                {{ if eq .Language.Lang "de" }}Einen Moment...{{ else }}Submitting...{{ end }}
+              </span>
+            </button>
+
+          </form>
+
+          <!-- Micro Copy -->
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-6 mb-6 text-center transition-colors duration-200">
+            {{ .Params.newsletter.micro_copy | default "No spam. Unsubscribe anytime." }}
+          </p>
+
+          <!-- Social Media Links -->
+          <div class="flex items-center justify-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <span class="text-xl font-semibold text-gray-900 dark:text-white" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; letter-spacing: -0.02em;">
+              {{ if eq .Language.Lang "de" }}Folge uns{{ else }}Follow us{{ end }}
+            </span>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/puzhapp" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-500 transition-colors" aria-label="Instagram">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@puzhapp" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-500 transition-colors" aria-label="TikTok">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Error Message -->
+          <div id="newsletter-error" class="hidden mt-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400 text-sm transition-colors duration-200">
+            <span id="newsletter-error-text"></span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Success Banner (Apple Blue, bounce animation) -->
+<div id="newsletter-success-banner" class="fixed top-6 z-[10001] transition-all ease-out" style="left: 50%; transform: translate(-50%, -200px); opacity: 0;">
+  <div class="flex items-center gap-4 px-7 py-2.5 rounded-full shadow-2xl" style="background-color: rgba(0, 102, 255, 0.95); border: 1px solid #0066FF;">
+
+    <!-- Success Icon -->
+    <svg class="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    </svg>
+
+    <!-- Success Message -->
+    <p class="text-sm md:text-base text-white font-medium whitespace-nowrap">
+      <span id="success-message-text"></span>
+    </p>
+
+    <!-- Close Button -->
+    <button
+      onclick="dismissSuccessBanner()"
+      class="p-1.5 text-white hover:text-gray-200 transition-colors flex-shrink-0"
+      aria-label="Close">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+  </div>
+</div>
+
+<!-- Newsletter JavaScript -->
+<script>
+  (function() {
+    const form = document.getElementById('newsletter-form');
+    const emailInput = document.getElementById('newsletter-email');
+    const submitBtn = document.getElementById('newsletter-submit');
+    const submitText = document.getElementById('newsletter-submit-text');
+    const submitLoading = document.getElementById('newsletter-submit-loading');
+    const errorDiv = document.getElementById('newsletter-error');
+    const errorText = document.getElementById('newsletter-error-text');
+    const successBanner = document.getElementById('newsletter-success-banner');
+    const successMessageText = document.getElementById('success-message-text');
+
+    // Get current language
+    const currentLang = '{{ .Language.Lang }}';
+
+    // Translations
+    const translations = {
+      en: {
+        success: 'Check your email to confirm your subscription!',
+        errorGeneric: 'Something went wrong. Please try again.',
+        errorEmail: 'Please enter a valid email address.',
+        errorAlready: 'This email is already subscribed.',
+        submitting: 'Submitting...'
+      },
+      de: {
+        success: 'Prüfe deine E-Mails, um dein Abo zu bestätigen!',
+        errorGeneric: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
+        errorEmail: 'Bitte gib eine gültige E-Mail-Adresse ein.',
+        errorAlready: 'Diese E-Mail ist bereits angemeldet.',
+        submitting: 'Einen Moment...'
+      }
+    };
+
+    const t = translations[currentLang] || translations.en;
+
+    // Show success banner with bounce animation
+    function showSuccessBanner(message) {
+      successMessageText.textContent = message;
+      successBanner.offsetHeight; // Trigger reflow
+
+      // Step 1: Slide down to 15px (from top-6 = 24px, so 39px total from top)
+      successBanner.style.transitionDuration = '600ms';
+      successBanner.style.transitionTimingFunction = 'cubic-bezier(0.34, 1.56, 0.64, 1)'; // Bounce easing
+      setTimeout(() => {
+        successBanner.style.transform = 'translate(-50%, 15px)'; // 15px deeper than normal
+        successBanner.style.opacity = '1';
+      }, 50);
+
+      // Step 2: Bounce back up slightly after 200ms
+      setTimeout(() => {
+        successBanner.style.transitionDuration = '300ms';
+        successBanner.style.transitionTimingFunction = 'ease-out';
+        successBanner.style.transform = 'translate(-50%, 5px)'; // Settle at 5px from normal
+      }, 250);
+
+      // Step 3: Auto-hide after 2.5 seconds
+      setTimeout(() => {
+        hideSuccessBanner();
+      }, 2500);
+    }
+
+    // Hide success banner
+    function hideSuccessBanner() {
+      successBanner.style.transitionDuration = '500ms';
+      successBanner.style.transitionTimingFunction = 'ease-in';
+      successBanner.style.transform = 'translate(-50%, -200px)';
+      successBanner.style.opacity = '0';
+    }
+
+    // Make dismissSuccessBanner global
+    window.dismissSuccessBanner = function() {
+      hideSuccessBanner();
+    };
+
+    // Show error message
+    function showError(message) {
+      errorText.textContent = message;
+      errorDiv.classList.remove('hidden');
+      setTimeout(() => {
+        errorDiv.classList.add('hidden');
+      }, 5000);
+    }
+
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const variant = document.getElementById('newsletter-variant')?.value || 'unknown';
+
+      // Basic validation
+      if (!email || !email.includes('@')) {
+        showError(t.errorEmail);
+        return;
+      }
+
+      // Disable form
+      submitBtn.disabled = true;
+      submitText.classList.add('hidden');
+      submitLoading.classList.remove('hidden');
+      errorDiv.classList.add('hidden');
+
+      try {
+        // Cloudflare Worker URL
+        const workerUrl = 'https://letter.puzh.com/subscribe';
+
+        const response = await fetch(workerUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            language: currentLang,
+            variant: variant
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Success!
+          form.reset();
+          showSuccessBanner(t.success);
+        } else {
+          // Error from backend
+          if (data.error === 'ALREADY_SUBSCRIBED') {
+            showError(t.errorAlready);
+          } else {
+            showError(data.message || t.errorGeneric);
+          }
+        }
+
+      } catch (error) {
+        console.error('Newsletter error:', error);
+        showError(t.errorGeneric);
+      } finally {
+        // Re-enable form
+        submitBtn.disabled = false;
+        submitText.classList.remove('hidden');
+        submitLoading.classList.add('hidden');
+      }
+    });
+
+  })();
+
+  // Sync Newsletter Logo & Button with Hero Variant
+  (function() {
+    // Color mapping for variants
+    const variantColors = {
+      'variant-a': { light: '#000000', dark: '#FFFFFF' }, // BLACK / WHITE
+      'variant-b': { light: '#0066FF', dark: '#1cbf00' }, // BLUE / GREEN
+      'variant-c': { light: '#1cbf00', dark: '#0066FF' }  // GREEN / BLUE
+    };
+
+    function updateButtonColor(variant) {
+      const button = document.querySelector('[data-newsletter-button]');
+      if (!button) return;
+
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      const bgColor = variantColors[variant]?.[isDarkMode ? 'dark' : 'light'] || '#000000';
+
+      // Text color: Black text ONLY on white button in dark mode, otherwise ALWAYS white
+      const textColor = (isDarkMode && bgColor === '#FFFFFF') ? '#000000' : '#FFFFFF';
+
+      button.style.backgroundColor = bgColor;
+      button.style.setProperty('color', textColor, 'important');
+      button.style.transition = 'opacity 0.2s ease';
+      button.onmouseenter = () => { button.style.opacity = '0.85'; };
+      button.onmouseleave = () => { button.style.opacity = '1'; };
+      console.log('Button color updated:', variant, isDarkMode ? 'dark' : 'light', bgColor, '| Text:', textColor);
+    }
+
+    // Wait for hero variant to be set
+    setTimeout(() => {
+      // Find which hero variant is visible
+      const heroVariants = document.querySelectorAll('[data-hero-variant]');
+      let activeVariant = 'variant-a'; // default
+
+      heroVariants.forEach(variant => {
+        if (variant.style.display !== 'none') {
+          activeVariant = variant.getAttribute('data-hero-variant');
+        }
+      });
+
+      // Show matching logo variant in newsletter
+      const newsletterLogoVariants = document.querySelectorAll('[data-newsletter-logo] [data-logo-variant]');
+      newsletterLogoVariants.forEach(logoVariant => {
+        if (logoVariant.getAttribute('data-logo-variant') === activeVariant) {
+          logoVariant.style.display = 'block';
+        } else {
+          logoVariant.style.display = 'none';
+        }
+      });
+
+      // Update button color
+      updateButtonColor(activeVariant);
+
+      // Store active variant for dark mode toggle
+      window.activeNewsletterVariant = activeVariant;
+
+      console.log('Newsletter synced with hero variant:', activeVariant);
+    }, 100);
+
+    // Listen for dark mode changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          if (window.activeNewsletterVariant) {
+            updateButtonColor(window.activeNewsletterVariant);
+          }
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  })();
+</script>
