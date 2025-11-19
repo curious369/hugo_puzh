@@ -132,7 +132,7 @@ layout: "mpf-block"
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     // Toast Notification Function
     function showToast(message, type = 'success') {
       const toast = document.getElementById('toast');
@@ -184,79 +184,96 @@ layout: "mpf-block"
     }
 
     // Get URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    const email = urlParams.get('email');
+    const params = new URLSearchParams(window.location.search);
+    let email = params.get("email") || "";
+    const token = params.get("token");
 
-    // If no token or email, redirect to error page
-    if (!token || !email) {
-      window.location.href = '/profil/link-expired/';
+    // Token confirmation logic
+    if (token) {
+      try {
+        const confirmRes = await fetch(`https://letter.puzh.com/confirm?token=${token}`);
+        const confirmData = await confirmRes.json();
+
+        if (confirmRes.ok && confirmData.success) {
+          // Token confirmed successfully
+          email = confirmData.email || email;
+          document.getElementById('email').value = email;
+          triggerConfetti();
+          showToast("✅ Email confirmed! Now add your first name.", "success");
+        } else {
+          // Token invalid or expired - redirect to link-expired
+          window.location.href = "/profil/link-expired/";
+          return;
+        }
+      } catch (err) {
+        console.error("Token confirmation error:", err);
+        showToast("Confirmation error. Please try again.", "error");
+        window.location.href = "/profil/link-expired/";
+        return;
+      }
+    } else if (email) {
+      document.getElementById('email').value = email;
+    } else {
+      window.location.href = "/profil/link-expired/";
       return;
     }
 
-    // Set email in readonly field
-    document.getElementById('email').value = email;
-
-    // Confirm token with API
-    fetch('https://api.puzh.com/confirm-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ token, email })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        triggerConfetti();
-        showToast("Your email has been <strong>confirmed</strong>!");
-      } else {
-        window.location.href = '/profil/link-expired/';
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      window.location.href = '/profil/link-expired/';
-    });
-
     // Handle form submission
-    document.getElementById('profile-form').addEventListener('submit', function(e) {
+    document.getElementById('profile-form').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       const submitBtn = document.getElementById('submit-btn');
-      const firstname = document.getElementById('firstname').value;
+      const firstname = document.getElementById('firstname').value.trim();
+
+      if (!firstname || !email) {
+        showToast("Please enter your first name", "error");
+        return;
+      }
 
       // Disable button during submission
       submitBtn.disabled = true;
       submitBtn.textContent = 'Saving...';
 
-      fetch('https://api.puzh.com/update-profile', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, firstname })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showToast("Your first name has been <strong>saved</strong>!");
-          setTimeout(() => {
-            submitBtn.textContent = '✓ Saved';
-            submitBtn.style.backgroundColor = '#10b981';
-          }, 500);
-        } else {
-          showToast("Error saving your first name. Please try again.", 'error');
+      try {
+        const res = await fetch("https://api.puzh.com/send-newsletter-email.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, first_name: firstname })
+        });
+
+        if (!res.ok) {
+          let errorText = "Server error";
+          try {
+            const errJson = await res.json();
+            errorText = errJson.error || "Server error";
+          } catch {
+            errorText = `Server error (${res.status})`;
+          }
+          showToast(errorText, "error");
           submitBtn.disabled = false;
           submitBtn.textContent = 'Save First Name';
+          return;
         }
-      })
-      .catch(error => {
+
+        const payload = await res.json();
+
+        if (payload.redirect && typeof payload.redirect === "string") {
+          if (/^https?:\/\//.test(payload.redirect) || payload.redirect.startsWith("/")) {
+            window.location.href = payload.redirect;
+            return;
+          }
+        }
+
+        // Show success
+        showToast("First name successfully saved!");
+        submitBtn.textContent = '✓ Saved';
+        submitBtn.style.backgroundColor = '#10b981';
+      } catch (error) {
         console.error('Error:', error);
-        showToast("Error saving your first name. Please try again.", 'error');
+        showToast("Network error. Please try again.", 'error');
         submitBtn.disabled = false;
         submitBtn.textContent = 'Save First Name';
-      });
+      }
     });
   });
 </script>
