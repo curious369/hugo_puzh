@@ -18,14 +18,13 @@
     </div>
 
     <!-- Video Card Container - Apple-Style -->
-    <div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 shadow-2xl" style="border-radius: 32px;">
+    <div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 shadow-2xl rounded-[24px] md:rounded-[32px]">
 
-      <!-- Video Element -->
-      <div class="relative w-full bg-black" style="height: 800px;">
+      <!-- Video Element - Responsive Height (iPhone optimized) -->
+      <div class="relative w-full bg-black h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px]">
         <video
           id="promo-video"
-          class="w-full h-full object-cover"
-          style="object-position: center bottom;"
+          class="w-full h-full object-cover object-center"
           poster="/images/puzh-loop-poster.webp"
           preload="metadata"
           controls
