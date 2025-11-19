@@ -3,277 +3,203 @@ title: "🟢 Super, du hast deine eMail bestätigt."
 layout: "mpf-block"
 ---
 
-<!-- Canvas Confetti Library -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<!-- Toast Notification -->
+<!-- Toast Notification (von oben reinslidend) -->
 <div id="toast" class="fixed left-1/2 transform -translate-x-1/2" style="top: -200px; z-index: 10001;">
-  <div class="text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2" style="background-color: #007aff;">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-    </svg>
-    <span id="toast-message">Nachricht</span>
-  </div>
+<div class="text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2" style="background-color: #007aff;">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+</svg>
+<span id="toast-message">Erfolgreich gespeichert</span>
+</div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mt-6 px-6" style="background-color: #ffffff;">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mt-6 px-6"> <!-- Einheitliches Padding -->
+<!-- 🟢 TEXT-BEREICH LINKS OBEN MIT GRÖSSERER SCHRIFT -->
+<div class="space-y-4 text-[18px] pt-4 pl-4 pr-4 pb-4 text-gray-900 dark:text-white"> <!-- ⬅️ gleichmäßiges Padding oben/unten -->
+<!-- HEADLINE -->
+<h1 class="text-xl font-bold text-left">
+Hey, ich bin übrigens Chris 👋
+</h1>
+<div>
+Wenn du magst, trag jetzt noch deinen Vornamen ein –
+dann kann ich dich in meinen eMails auch persönlich ansprechen.
+</div>
+<h1 class="text-xl font-bold text-left pt-6">
+Jetzt Vorname hinzufügen
+</h1>
 
-  <!-- TEXT LEFT -->
-  <div class="space-y-4 text-[18px] pt-4 pl-4 pr-4 pb-4 text-gray-900 dark:text-white">
-    <h1 class="text-xl font-bold text-left text-gray-900 dark:text-white">
-      Willkommen in der PUZH Community!
-    </h1>
-    <div class="text-gray-900 dark:text-white">
-      Deine eMail wurde erfolgreich bestätigt.<br /><br />
-      Um dein Erlebnis zu personalisieren, füge bitte unten deinen Vornamen hinzu:
-    </div>
+<form id="profileForm" class="space-y-3">
+<input
+type="email"
+id="email"
+name="email"
+readonly
+class="block w-full border border-gray-300 rounded-full bg-gray-100 text-center py-[10px] px-[14px] text-base text-gray-800 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+/>
+<input
+type="text"
+id="firstName"
+name="first_name"
+placeholder="z. B. Felix"
+required
+class="block w-full border border-gray-300 rounded-full py-[10px] px-[14px] text-base text-center placeholder-gray-400 placeholder:font-semibold dark:bg-gray-700 dark:text-white dark:border-gray-600"
+/>
+<button
+type="submit"
+id="saveBtn"
+class="w-full bg-[#007aff] text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300 cursor-pointer disabled:cursor-wait disabled:opacity-75"
+>
+<span id="btn-text">Vorname speichern</span>
+<span id="btn-spinner" class="hidden">⏳ Wird gespeichert...</span>
+</button>
+</form>
 
-    <!-- Form -->
-    <form id="profile-form" class="space-y-4 pt-4">
-      <!-- Email (readonly) -->
-      <div>
-        <label for="email" class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">Deine eMail</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          readonly
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
-          placeholder="deine@email.com"
-        />
-      </div>
+</div>
 
-      <!-- First Name -->
-      <div>
-        <label for="firstname" class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">Dein Vorname</label>
-        <input
-          type="text"
-          id="firstname"
-          name="firstname"
-          required
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007aff] dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-          placeholder="Dein Vorname"
-        />
-      </div>
-
-      <!-- Submit Button -->
-      <button
-        type="submit"
-        id="submit-btn"
-        class="w-full py-3 px-6 text-white font-semibold rounded-lg transition-colors duration-200"
-        style="background-color: #007aff;"
-        onmouseover="this.style.backgroundColor='#0056b3'"
-        onmouseout="this.style.backgroundColor='#007aff'"
-      >
-        Vorname speichern
-      </button>
-    </form>
-
-    <div class="text-gray-900 dark:text-white pt-4">
-      Du erhältst exklusive Einblicke, Tipps und Updates direkt in dein Postfach.
-    </div>
-
-    <p class="text-gray-900 dark:text-white">Dein Chris | SoloKreator</p>
-
-    <h1 class="text-xl font-bold text-left text-gray-900 dark:text-white pt-6">
-      Folge mir gerne auch hier:
-    </h1>
-
-    <!-- Social Icons -->
-    <style>
-      .social-icon {
-        font-size: 1.5rem;
-        transition: color 0.2s ease;
-      }
-
-      .youtube-icon {
-        color: #FF0000;
-      }
-      .youtube-icon:hover {
-        color: #cc0000;
-      }
-
-      .instagram-icon {
-        color: #E1306C;
-      }
-      .instagram-icon:hover {
-        color: #C13584;
-      }
-
-      .linkedin-icon {
-        color: #0A66C2;
-      }
-      .linkedin-icon:hover {
-        color: #004182;
-      }
-    </style>
-
-    <div class="flex gap-4 pt-4 text-xl">
-      <a href="https://youtube.com/@puzh.channel" target="_blank" class="social-icon youtube-icon" aria-label="YouTube">
-        <i class="bi bi-youtube"></i>
-      </a>
-
-      <a href="https://linkedin.com/company/puzh" target="_blank" class="social-icon linkedin-icon" aria-label="LinkedIn">
-        <i class="bi bi-linkedin"></i>
-      </a>
-      <a href="https://instagram.com/puzh.official" target="_blank" class="social-icon instagram-icon" aria-label="Instagram">
-        <i class="bi bi-instagram"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- IMAGE RIGHT -->
-  <div class="flex justify-center items-start pt-4 pb-4 pr-4 pl-4">
-    <img src="/images/letterchris-side.webp"
-         alt="Chris"
-         class="rounded-[23px] shadow-md w-full max-w-[400px] h-auto object-cover object-top" />
-  </div>
-
+<!-- 🟢 BILD OBEN RECHTS EINGEPASST -->
+<div class="flex justify-center items-start pt-4 pb-4 pr-4 pl-4"> <!-- ⬅️ gleichmäßiger Rand -->
+<img src="/images/letterchris-side.webp"
+alt="Chris"
+class="rounded-[23px] shadow-md w-full max-w-[400px] h-auto object-cover object-top" />
+</div>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    // Toast Notification Function
-    function showToast(message, type = 'success') {
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toast-message');
-      const toastDiv = toast.firstElementChild;
+document.addEventListener("DOMContentLoaded", async () => {
+const params    = new URLSearchParams(window.location.search);
+let email       = params.get("email") || "";
+const token     = params.get("token");
+const form      = document.getElementById("profileForm");
+const emailIn   = document.getElementById("email");
+const nameIn    = document.getElementById("firstName");
+const btn       = document.getElementById("saveBtn");
+const btnText   = document.getElementById("btn-text");
+const btnSpinner = document.getElementById("btn-spinner");
 
-      toastMessage.innerHTML = message;
+// Toast Notification Function
+function showToast(message, type = 'success') {
+const toast = document.getElementById('toast');
+const toastMessage = document.getElementById('toast-message');
+const toastDiv = toast.firstElementChild;
 
-      if (type === 'error') {
-        toastDiv.style.backgroundColor = '#dc2626';
-      } else {
-        toastDiv.style.backgroundColor = '#007aff';
-      }
+// Set message
+toastMessage.innerHTML = message;
 
-      toast.style.transition = 'top 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      toast.style.top = '20px';
+// Set color based on type
+if (type === 'error') {
+toastDiv.style.backgroundColor = '#dc2626'; // red-600
+} else {
+toastDiv.style.backgroundColor = '#007aff'; // blue
+}
 
-      setTimeout(() => {
-        toast.style.transition = 'top 1.2s ease-in-out';
-        toast.style.top = '-200px';
-      }, 3000);
-    }
+// Slide down with bounce (schneller)
+toast.style.transition = 'top 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
+toast.style.top = '20px';
 
-    // Confetti Function
-    function triggerConfetti() {
-      const duration = 3000;
-      const animationEnd = Date.now() + duration;
-      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+// Hide after 3 seconds with slower smooth transition
+setTimeout(() => {
+toast.style.transition = 'top 1.2s ease-in-out';
+toast.style.top = '-200px';
+}, 3000);
+}
 
-      function randomInRange(min, max) {
-        return Math.random() * (max - min) + min;
-      }
+// Token confirmation logic
+if (token) {
+try {
+const confirmRes = await fetch(`https://letter.puzh.com/confirm?token=${token}`);
+const confirmData = await confirmRes.json();
 
-      const interval = setInterval(function() {
-        const timeLeft = animationEnd - Date.now();
-        if (timeLeft <= 0) {
-          return clearInterval(interval);
-        }
-        const particleCount = 50 * (timeLeft / duration);
-        confetti(Object.assign({}, defaults, {
-          particleCount,
-          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
-        }));
-        confetti(Object.assign({}, defaults, {
-          particleCount,
-          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
-        }));
-      }, 250);
-    }
+if (confirmRes.ok && confirmData.success) {
+// Token confirmed successfully
+email = confirmData.email || email;
+emailIn.value = email;
+showToast("✅ E-Mail bestätigt! Trage jetzt deinen Vornamen ein.", "success");
+} else {
+// Token invalid or expired - redirect to link-abgelaufen
+window.location.href = "/de/profil/link-abgelaufen/";
+return;
+}
+} catch (err) {
+console.error("Token confirmation error:", err);
+showToast("Fehler bei der Bestätigung. Bitte versuche es erneut.", "error");
+}
+} else if (email) {
+emailIn.value = email;
+}
 
-    // Get URL parameters
-    const params = new URLSearchParams(window.location.search);
-    let email = params.get("email") || "";
-    const token = params.get("token");
+form.addEventListener("submit", async (e) => {
+e.preventDefault();
+btnText.classList.add("hidden");
+btnSpinner.classList.remove("hidden");
+btn.disabled = true;
 
-    // Token confirmation logic
-    if (token) {
-      try {
-        const confirmRes = await fetch(`https://letter.puzh.com/confirm?token=${token}`);
-        const confirmData = await confirmRes.json();
+const firstName = nameIn.value.trim();
+if (!firstName || !email) {
+btnText.classList.remove("hidden");
+btnSpinner.classList.add("hidden");
+btn.disabled = false;
+showToast("Bitte Vornamen eingeben", "error");
+return;
+}
 
-        if (confirmRes.ok && confirmData.success) {
-          // Token confirmed successfully
-          email = confirmData.email || email;
-          document.getElementById('email').value = email;
-          triggerConfetti();
-          showToast("✅ E-Mail bestätigt! Trage jetzt deinen Vornamen ein.", "success");
-        } else {
-          // Token invalid or expired - redirect to link-abgelaufen
-          window.location.href = "/de/profil/link-abgelaufen/";
-          return;
-        }
-      } catch (err) {
-        console.error("Token confirmation error:", err);
-        showToast("Fehler bei der Bestätigung. Bitte versuche es erneut.", "error");
-        window.location.href = "/de/profil/link-abgelaufen/";
-        return;
-      }
-    } else if (email) {
-      document.getElementById('email').value = email;
-    } else {
-      window.location.href = "/de/profil/link-abgelaufen/";
-      return;
-    }
+let res, payload;
+try {
+res = await fetch("https://letter.puzh.com/update-profile", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ email, first_name: firstName })
+});
+} catch (networkErr) {
+btnText.classList.remove("hidden");
+btnSpinner.classList.add("hidden");
+btn.disabled = false;
+showToast("Netzwerkfehler: " + networkErr.message, "error");
+return;
+}
 
-    // Handle form submission
-    document.getElementById('profile-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
+// Wenn Status nicht 2xx, versuche zuerst, die Fehlermeldung aus JSON zu lesen
+if (!res.ok) {
+btnText.classList.remove("hidden");
+btnSpinner.classList.add("hidden");
+let errorText = "Server-Fehler";
+try {
+const errJson = await res.json();
+errorText = errJson.error || "Server-Fehler";
+} catch {
+errorText = `Server-Fehler (${res.status})`;
+}
+showToast(errorText, "error");
+btn.disabled = false;
+return;
+}
 
-      const submitBtn = document.getElementById('submit-btn');
-      const firstname = document.getElementById('firstname').value.trim();
+// Nun ist res.ok, wir parsen das JSON
+try {
+payload = await res.json();
+} catch (parseErr) {
+btnText.classList.remove("hidden");
+btnSpinner.classList.add("hidden");
+btn.disabled = false;
+showToast("Ungültige Server-Antwort", "error");
+return;
+}
 
-      if (!firstname || !email) {
-        showToast("Bitte Vornamen eingeben", "error");
-        return;
-      }
+// Haben wir einen redirect?
+if (payload.redirect && typeof payload.redirect === "string") {
+// absolute oder relative URL?
+if (/^https?:\/\//.test(payload.redirect) || payload.redirect.startsWith("/")) {
+window.location.href = payload.redirect;
+return;
+}
+}
 
-      // Disable button during submission
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Speichere...';
+// Statt Redirect einfach Erfolg anzeigen
+btnText.classList.remove("hidden");
+btnSpinner.classList.add("hidden");
+btn.disabled = false;
 
-      try {
-        const res = await fetch("https://api.puzh.com/send-newsletter-email.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, first_name: firstname })
-        });
-
-        if (!res.ok) {
-          let errorText = "Server-Fehler";
-          try {
-            const errJson = await res.json();
-            errorText = errJson.error || "Server-Fehler";
-          } catch {
-            errorText = `Server-Fehler (${res.status})`;
-          }
-          showToast(errorText, "error");
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Vorname speichern';
-          return;
-        }
-
-        const payload = await res.json();
-
-        if (payload.redirect && typeof payload.redirect === "string") {
-          if (/^https?:\/\//.test(payload.redirect) || payload.redirect.startsWith("/")) {
-            window.location.href = payload.redirect;
-            return;
-          }
-        }
-
-        // Show success
-        showToast("Vorname erfolgreich gespeichert!");
-        submitBtn.textContent = '✓ Gespeichert';
-        submitBtn.style.backgroundColor = '#10b981';
-      } catch (error) {
-        console.error('Error:', error);
-        showToast("Netzwerkfehler. Bitte versuche es erneut.", 'error');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Vorname speichern';
-      }
-    });
-  });
+// Show success toast
+showToast("Vorname erfolgreich gespeichert!");
+});
+});
 </script>

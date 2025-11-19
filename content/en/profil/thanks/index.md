@@ -16,7 +16,7 @@ layout: "mpf-block"
   </div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mt-6 px-6" style="background-color: #ffffff;">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mt-6 px-6 bg-white dark:bg-gray-800">
   <!-- IMAGE LEFT -->
   <div class="flex justify-center items-start pt-4 pb-4 pr-4 pl-4">
     <img src="/images/chris-moenninghoff-head.webp"
@@ -25,8 +25,8 @@ layout: "mpf-block"
   </div>
 
   <!-- TEXT RIGHT -->
-  <div class="space-y-4 text-[18px] pt-4 pl-4 pr-4 pb-4 text-gray-900">
-    <h1 class="text-xl font-bold text-left text-gray-900">
+  <div class="space-y-4 text-[18px] pt-4 pl-4 pr-4 pb-4 text-gray-900 dark:text-white">
+    <h1 class="text-xl font-bold text-left text-gray-900 dark:text-white">
       Almost there…
     </h1>
     <div>
@@ -39,7 +39,7 @@ layout: "mpf-block"
       Thanks in advance.<br />
   </div>
   <p>Your Chris | SoloCreator</p>
-  <h1 class="text-xl font-bold text-left text-gray-900 pt-6">
+  <h1 class="text-xl font-bold text-left text-gray-900 dark:text-white pt-6">
       Follow me here:
     </h1>
 
