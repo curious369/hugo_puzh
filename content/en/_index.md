@@ -46,7 +46,7 @@ hero_variants:
 social_proof:
   waitlist_count: "10,000+"
   text: "Join 10,000+ people on the waitlist."
-  urgency: "Limited OG Codes available. Lifetime recognition."
+  urgency: "Limited Early Bird Codes (OG Members) available. Lifetime recognition."
 
 # ═══════════════════════════════════════════════════════════════
 # ENGINE / CLAIMS
@@ -117,7 +117,7 @@ video_card:
 # PORTRAIT SLIDER - Apple Watch Style
 # ═══════════════════════════════════════════════════════════════
 portrait_slider:
-  headline: "Train Anywhere. Anytime."
+  headline: "Train motivated. Anytime."
   subheadline: "Home. Office. Park. Daily habit."
 
   cards:
@@ -221,7 +221,7 @@ founder:
     With PUZH.app you and I can do PUZHups every day. And stay motivated.
 
   closing: "New day. Same puzhup habit."
-  signature: "Your Chris"
+  signature: "Your Chris Mönninghoff"
   title: "Founder [PUZH.app](https://puzh.app) und [SNAB.app](https://snab.app)"
   image: "/images/chris-moenninghoff-head-black-white.webp"
 

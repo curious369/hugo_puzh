@@ -1,6 +1,6 @@
 ---
 title: "Verwendung von Cookies"
-layout: "recht"
+layout: "single"
 ---
 
 Wir verwenden Cookies, um dir ein optimales Nutzungserlebnis auf PUZH.com zu bieten.

@@ -37,6 +37,25 @@
           Dein Browser unterstützt das Video-Element nicht.
         </video>
 
+        <!-- PUZH Logo Overlay - Centered at top of video -->
+        <div data-video-logo style="position: absolute; top: 32px; left: 50%; transform: translateX(-50%); z-index: 9999; pointer-events: none;">
+          <!-- VARIANT A: BLACK/WHITE -->
+          <div data-logo-variant="variant-a" style="display: none;">
+            <img src="/images/logo_puzh_black.svg" alt="PUZH" class="block dark:hidden" style="height: 100px; width: auto;">
+            <img src="/images/logo_puzh_white.svg" alt="PUZH" class="hidden dark:block" style="height: 100px; width: auto;">
+          </div>
+          <!-- VARIANT B: BLUE/GREEN -->
+          <div data-logo-variant="variant-b" style="display: none;">
+            <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="block dark:hidden" style="height: 100px; width: auto;">
+            <img src="/images/logo_puzh_green.svg" alt="PUZH" class="hidden dark:block" style="height: 100px; width: auto;">
+          </div>
+          <!-- VARIANT C: GREEN/BLUE -->
+          <div data-logo-variant="variant-c" style="display: none;">
+            <img src="/images/logo_puzh_green.svg" alt="PUZH" class="block dark:hidden" style="height: 100px; width: auto;">
+            <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="hidden dark:block" style="height: 100px; width: auto;">
+          </div>
+        </div>
+
         <!-- Play/Pause Button Overlay -->
         <button
           id="video-play-btn"
@@ -55,7 +74,18 @@
         </button>
 
         <!-- Click anywhere to toggle (optional) -->
-        <div class="absolute inset-0 cursor-pointer" id="video-overlay"></div>
+        <div class="absolute inset-0 cursor-pointer z-5" id="video-overlay"></div>
+
+        <!-- App Store Badge Overlay - Centered at bottom of video -->
+        <div style="position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 9999; pointer-events: auto;">
+          <a href="https://apps.apple.com/app/puzh" target="_blank" rel="noopener noreferrer" style="display: block;">
+            {{ if eq .Language.Lang "de" }}
+            <img src="/images/app-store-badge-de.svg" alt="Vorbestellen im App Store" style="height: 50px; width: auto; display: block; max-width: none;">
+            {{ else }}
+            <img src="/images/app-store-badge-en.svg" alt="Pre-order on the App Store" style="height: 50px; width: auto; display: block; max-width: none;">
+            {{ end }}
+          </a>
+        </div>
       </div>
 
     </div>
@@ -100,5 +130,32 @@
     playIcon.classList.remove('hidden');
     pauseIcon.classList.add('hidden');
   });
+})();
+
+// Sync Video Logo with Hero Variant
+(function() {
+  setTimeout(() => {
+    // Find which hero variant is visible
+    const heroVariants = document.querySelectorAll('[data-hero-variant]');
+    let activeVariant = 'variant-a'; // default
+
+    heroVariants.forEach(variant => {
+      if (variant.style.display !== 'none') {
+        activeVariant = variant.getAttribute('data-hero-variant');
+      }
+    });
+
+    // Show matching logo variant in video
+    const videoLogoVariants = document.querySelectorAll('[data-video-logo] [data-logo-variant]');
+    videoLogoVariants.forEach(logoVariant => {
+      if (logoVariant.getAttribute('data-logo-variant') === activeVariant) {
+        logoVariant.style.display = 'block';
+      } else {
+        logoVariant.style.display = 'none';
+      }
+    });
+
+    console.log('Video logo synced with hero variant:', activeVariant);
+  }, 100);
 })();
 </script>

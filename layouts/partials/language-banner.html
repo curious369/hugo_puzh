@@ -7,8 +7,8 @@
      - Geo-detection via JavaScript
      ═══════════════════════════════════════════════════════════ -->
 
-<div id="language-banner" class="fixed top-6 left-4 right-4 md:left-1/2 z-[10001] transition-all duration-1000 ease-out" style="transform: translate(0, -200px) md:translate(-50%, -200px); opacity: 0;">
-  <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 px-5 sm:px-7 py-3 sm:py-2.5 bg-gray-100/95 border border-gray-300 rounded-3xl shadow-2xl max-w-md mx-auto">
+<div id="language-banner" class="fixed top-6 z-[10001] pointer-events-none" style="left: 50%; transform: translate(-50%, -200px); opacity: 0;">
+  <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 px-5 sm:px-7 py-3 sm:py-2.5 bg-gray-100/95 border border-gray-300 rounded-3xl shadow-2xl max-w-md mx-auto pointer-events-auto">
 
     <div class="flex items-center gap-3 w-full sm:w-auto">
       <svg class="w-5 h-5 text-gray-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,30 +66,29 @@
       return null;
     }
 
-    // Show banner with animation
+    // Show banner with animation (2-step bounce like success banner)
     function showBanner() {
-      // Trigger reflow for animation
-      banner.offsetHeight;
+      // Step 1: Drop down with bounce (overshoot)
+      banner.style.transitionDuration = '600ms';
+      banner.style.transitionTimingFunction = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
       setTimeout(() => {
-        // Different transform for mobile vs desktop
-        const isMobile = window.innerWidth < 768;
-        if (isMobile) {
-          banner.style.transform = 'translate(0, 0)';
-        } else {
-          banner.style.transform = 'translate(-50%, 0)';
-        }
+        banner.style.transform = 'translate(-50%, 15px)';
         banner.style.opacity = '1';
       }, 50);
+
+      // Step 2: Settle back to normal position
+      setTimeout(() => {
+        banner.style.transitionDuration = '300ms';
+        banner.style.transitionTimingFunction = 'ease-out';
+        banner.style.transform = 'translate(-50%, 5px)';
+      }, 250);
     }
 
     // Hide banner with animation
     function hideBanner() {
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) {
-        banner.style.transform = 'translate(0, -200px)';
-      } else {
-        banner.style.transform = 'translate(-50%, -200px)';
-      }
+      banner.style.transitionDuration = '500ms';
+      banner.style.transitionTimingFunction = 'ease-in';
+      banner.style.transform = 'translate(-50%, -200px)';
       banner.style.opacity = '0';
     }
 

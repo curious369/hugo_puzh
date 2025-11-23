@@ -25,7 +25,14 @@
       <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-tight">
         {{ (index .Params.hero_variants 0).subheadline | safeHTML }}
       </p>
-      <div class="flex justify-center">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://apps.apple.com/app/puzh" target="_blank" rel="noopener noreferrer">
+          {{ if eq .Lang "de" }}
+          <img src="/images/app-store-badge-de.svg" alt="Vorbestellen im App Store" style="height: 50px; width: auto;">
+          {{ else }}
+          <img src="/images/app-store-badge-en.svg" alt="Pre-order on the App Store" style="height: 50px; width: auto;">
+          {{ end }}
+        </a>
         <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3">
           {{ (index .Params.hero_variants 0).cta_primary }}
         </a>
@@ -52,7 +59,14 @@
       <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-tight">
         {{ (index .Params.hero_variants 1).subheadline | safeHTML }}
       </p>
-      <div class="flex justify-center">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://apps.apple.com/app/puzh" target="_blank" rel="noopener noreferrer">
+          {{ if eq .Lang "de" }}
+          <img src="/images/app-store-badge-de.svg" alt="Vorbestellen im App Store" style="height: 50px; width: auto;">
+          {{ else }}
+          <img src="/images/app-store-badge-en.svg" alt="Pre-order on the App Store" style="height: 50px; width: auto;">
+          {{ end }}
+        </a>
         <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3">
           {{ (index .Params.hero_variants 1).cta_primary }}
         </a>
@@ -79,7 +93,14 @@
       <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-tight">
         {{ (index .Params.hero_variants 2).subheadline | safeHTML }}
       </p>
-      <div class="flex justify-center">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://apps.apple.com/app/puzh" target="_blank" rel="noopener noreferrer">
+          {{ if eq .Lang "de" }}
+          <img src="/images/app-store-badge-de.svg" alt="Vorbestellen im App Store" style="height: 50px; width: auto;">
+          {{ else }}
+          <img src="/images/app-store-badge-en.svg" alt="Pre-order on the App Store" style="height: 50px; width: auto;">
+          {{ end }}
+        </a>
         <a href="#newsletter" class="btn-pill-primary text-lg px-8 py-3">
           {{ (index .Params.hero_variants 2).cta_primary }}
         </a>

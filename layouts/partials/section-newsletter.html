@@ -55,12 +55,23 @@
             }
           </style>
 
-          <div class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 text-left">
+          <div class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 text-left mb-8">
             {{ if eq .Language.Lang "de" }}
               <p>Wenn Du bereit bist - sichere dir deinen limitierten OG Platz.</p>
             {{ else }}
               <p>If you're ready - claim your limited OG spot.</p>
             {{ end }}
+          </div>
+
+          <!-- App Store Badge -->
+          <div class="flex justify-start">
+            <a href="https://apps.apple.com/app/puzh" target="_blank" rel="noopener noreferrer">
+              {{ if eq .Language.Lang "de" }}
+              <img src="/images/app-store-badge-de.svg" alt="Vorbestellen im App Store" style="height: 50px; width: auto;">
+              {{ else }}
+              <img src="/images/app-store-badge-en.svg" alt="Pre-order on the App Store" style="height: 50px; width: auto;">
+              {{ end }}
+            </a>
           </div>
         </div>
 

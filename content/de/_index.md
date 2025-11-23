@@ -58,7 +58,7 @@ social_proof:
   founding_spots: "1.000"
   spots_remaining: "347"
   text: "Schließe dich 10.000+ Menschen an, die ihre Stärke-Identität aufbauen."
-  urgency: "Limitierte OG Codes verfügbar. Lebenslange Anerkennung."
+  urgency: "Limitierte Early Bird Codes (OG Members) verfügbar. Lebenslange Anerkennung."
 
 # ═══════════════════════════════════════════════════════════════
 # WHY SECTION
@@ -121,7 +121,7 @@ video_card:
 # PORTRAIT SLIDER - Apple Watch Style
 # ═══════════════════════════════════════════════════════════════
 portrait_slider:
-  headline: "Trainiere überall. Jederzeit."
+  headline: "Trainiere motiviert. Jederzeit."
   subheadline: "Zuhause. Büro. Park. Tägliche Gewohnheit."
 
   cards:
@@ -225,7 +225,7 @@ founder:
     Mit PUZH.app kannst du und ich jeden Tag PUZHups machen. Und bleiben motiviert.
 
   closing: "New day. Same puzhup habit."
-  signature: "Dein Chris"
+  signature: "Dein Chris Mönninghoff"
   title: "Founder [PUZH.app](https://puzh.app) und [SNAB.app](https://snab.app)"
   image: "/images/chris-moenninghoff-head-black-white.webp"
 
