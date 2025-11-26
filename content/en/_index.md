@@ -223,7 +223,7 @@ founder:
   closing: "New day. Same puzhup habit."
   signature: "Your Chris Mönninghoff"
   title: "Founder [PUZH.app](https://puzh.app) und [SNAB.app](https://snab.app)"
-  image: "/images/chris-moenninghoff-head-black-white.webp"
+  image: "/images/chris_moenninghoff_25_032 Kopie.webp"
 
 ---
 
