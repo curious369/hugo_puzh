@@ -1,0 +1,151 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO 0 — VIDEO-MARQUEE (1:1 aus puzh_landing übernommen)
+     EINE Reihe, rechts → links, nahtlos. Golden-Ratio Portrait-Cards.
+     Edge-Fade-Maske, pause-on-hover. Clips später aus Cloudflare R2.
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="vw-hero">
+  <div class="vw-viewport">
+    <div class="vw-row" id="vwRow"></div>
+  </div>
+
+  <a href="#hero-message" aria-label="weiter" class="vw-scroll">
+    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+  </a>
+</section>
+
+<style>
+  /* exakt aus puzh_landing/style.css — Marquee + Golden-Ratio Cards */
+  .vw-hero { background: #060606; padding: 24px 0 64px; overflow: hidden; }
+  .vw-viewport {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+  .vw-row {
+    display: flex;
+    gap: 36px;
+    width: max-content;
+    padding: 8px 0;
+    animation: vw-scroll-left 46s linear infinite;
+  }
+  /* Pause nur auf echten Hover-Geräten (Maus). Auf Touch/iOS bleibt :hover
+     sonst "kleben" und friert den Scroll ein. */
+  @media (hover: hover) and (pointer: fine) {
+    .vw-row:hover { animation-play-state: paused; }
+  }
+  @keyframes vw-scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .vw-card {
+    position: relative;
+    flex: none;
+    width: 290px;
+    height: 520px;
+    border-radius: 32px;
+    overflow: hidden;
+    background: #111113;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .vw-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Text-Overlay auf einer Card (weiß + dunkle Outline, mittig) */
+  .vw-overlay {
+    position: absolute; inset: 0; z-index: 3;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px; padding: 16px; text-align: center; pointer-events: none;
+  }
+  .vw-ov {
+    color: #fff; line-height: 1.06; letter-spacing: 0.01em;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+    -webkit-text-stroke: 1px rgba(0,0,0,0.55);
+            text-stroke: 1px rgba(0,0,0,0.55);
+    paint-order: stroke fill;
+  }
+  .vw-ov-small { font-size: 20px; font-weight: 600; }
+  .vw-ov-big   { font-size: 34px; font-weight: 800; }
+  @media (max-width: 640px) {
+    .vw-ov-small { font-size: 16px; }
+    .vw-ov-big   { font-size: 27px; }
+  }
+
+  .vw-scroll { position: absolute; left: 50%; transform: translateX(-50%); bottom: 22px; color: rgba(255,255,255,0.8); transition: color .2s; }
+  .vw-scroll:hover { color: #fff; }
+  .vw-scroll svg { animation: vw-bounce 1.6s infinite; }
+  @keyframes vw-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+  .vw-hero { position: relative; }
+
+  @media (max-width: 640px) {
+    .vw-hero { padding: 16px 0 48px; }
+    .vw-card { width: 220px; height: 400px; }
+    .vw-row { gap: 22px; }
+  }
+  /* Marquee-Scroll läuft bewusst IMMER (sanfter 46s-Lauf, Kern-Branding) —
+     auch bei aktiviertem "Bewegung reduzieren" auf dem iPhone. */
+</style>
+
+<script>
+  (function () {
+    const MEDIA = "{{ .Site.Params.mediaBaseURL }}";
+    // Reihenfolge: abwechselnd neu/alt. slider0001 (= 0008) bewusst auf Position 2 (sofort sichtbar).
+    // ── Media-Katalog: jedes Video mit name (puzh_com-Referenz), src + tags.
+    //    Thumb wird pro Video aus dem gleichnamigen .jpg abgeleitet (poster),
+    //    prio = sofort sichtbares Vorschau-Video (Position 4).
+    const CLIPS = [
+      { name: 'puzh_com_slider_0001', src: '/videos/slider/puzh_com_slider_0001.mp4', tags: ['avatar', 'healthcare'] },
+      { name: 'puzh_com_wall_01',     src: '/videos/wall/clip1.mp4',                    tags: ['ugc', 'lifestyle'] },
+      { name: 'puzh_com_slider_0002', src: '/videos/slider/puzh_com_slider_0002.mp4', tags: ['product', 'food'] },
+      { name: 'puzh_com_slider_0008', src: '/videos/slider/puzh_com_slider_0008.mp4', tags: ['founder', 'whiteboard'], prio: true },
+      { name: 'puzh_com_wall_02',     src: '/videos/wall/clip2.mp4',                    tags: ['ugc', 'lifestyle'] },
+      { name: 'puzh_com_slider_0004', src: '/videos/slider/puzh_com_slider_0004.mp4', tags: ['avatar', 'beauty'] },
+      { name: 'puzh_com_wall_03',     src: '/videos/wall/clip3.mp4',                    tags: ['ugc', 'lifestyle'] },
+      { name: 'puzh_com_slider_0003', src: '/videos/slider/puzh_com_slider_0003.mp4', tags: ['product', 'supplement'] },
+      { name: 'puzh_com_wall_04',     src: '/videos/wall/clip4.mp4',                    tags: ['ugc', 'automotive'], overlay: ['Auch', 'MARKETING', 'ist', 'CHEFSACHE'] },
+      { name: 'puzh_com_slider_0006', src: '/videos/slider/puzh_com_slider_0006.mp4', tags: ['avatar', 'education'] },
+      { name: 'puzh_com_wall_05',     src: '/videos/wall/clip5.mp4',                    tags: ['ugc', 'lifestyle'] },
+      { name: 'puzh_com_slider_0005', src: '/videos/slider/puzh_com_slider_0005.mp4', tags: ['avatar', 'lifestyle'] },
+      { name: 'puzh_com_wall_09',     src: '/videos/wall/clip9.mp4',                    tags: ['ugc', 'lifestyle'] },
+      { name: 'puzh_com_slider_0007', src: '/videos/slider/puzh_com_slider_0007.mp4', tags: ['avatar'] },
+      { name: 'puzh_com_wall_10',     src: '/videos/wall/clip10.mp4',                   tags: ['ugc', 'lifestyle'] },
+      { name: 'puzh_com_wall_11',     src: '/videos/wall/clip11.mp4',                   tags: ['ugc', 'lifestyle'] },
+      { name: 'puzh_com_wall_12',     src: '/videos/wall/clip12.mp4',                   tags: ['ugc', 'lifestyle'] }
+    ];
+
+    function makeCard(clip) {
+      const poster = MEDIA + clip.src.replace(/\.mp4$/, '.jpg');   // Thumb pro Video
+      const card = document.createElement('div');
+      card.className = 'vw-card';
+      card.setAttribute('data-video', clip.name);
+      card.setAttribute('data-tags', clip.tags.join(','));
+
+      const v = document.createElement('video');
+      v.src = MEDIA + clip.src;
+      v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
+      v.poster = poster;   // Standbild → sofort sichtbar, nie schwarz (kein Karten-BG mehr → keine weißen Compositing-Blitzer)
+      v.preload = clip.prio ? 'auto' : 'metadata';
+      if (clip.prio) { v.setAttribute('fetchpriority', 'high'); }
+      v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('autoplay', '');
+      v.setAttribute('aria-label', 'PUZH AI content · ' + clip.tags.join(', '));
+      card.appendChild(v);
+
+      // Optionales Text-Overlay (weiß + Outline, mittig). UPPERCASE-Zeilen = groß.
+      if (clip.overlay && clip.overlay.length) {
+        const ov = document.createElement('div');
+        ov.className = 'vw-overlay';
+        ov.innerHTML = clip.overlay.map(function (line) {
+          const big = line === line.toUpperCase() && line.length > 1;
+          return '<span class="vw-ov ' + (big ? 'vw-ov-big' : 'vw-ov-small') + '">' + line + '</span>';
+        }).join('');
+        card.appendChild(ov);
+      }
+      return card;
+    }
+    // einmal duplizieren → nahtloser -50% Loop
+    const row = document.getElementById('vwRow');
+    [...CLIPS, ...CLIPS].forEach(clip => row.appendChild(makeCard(clip)));
+
+    // Perf: nur sichtbare Videos abspielen
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { const v = e.target; if (e.isIntersecting) v.play().catch(()=>{}); else v.pause(); });
+    }, { rootMargin: '120px' });
+    document.querySelectorAll('.vw-card video').forEach(v => io.observe(v));
+  })();
+</script>

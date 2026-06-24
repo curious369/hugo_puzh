@@ -10,16 +10,6 @@
 <footer id="footer" class="bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-400 pb-4 transition-colors duration-200" style="padding-top: 4rem;">
   <div class="max-w-[980px] mx-auto px-4 text-sm space-y-4">
 
-    <!-- Facebook Disclaimer -->
-    <p>
-      This site is not a part of the Facebook™ website or Facebook™ Inc. Additionally, this site is NOT endorsed by Facebook™ in any way. Facebook™ is a trademark of Facebook™, Inc.
-    </p>
-
-    <!-- Google Disclaimer -->
-    <p>
-      This site is not a part of the Google™ website or Google™ Inc. Additionally, This site is NOT endorsed by Google™ in any way. Google™ is a trademark of Google™, Inc.
-    </p>
-
     <!-- Border -->
     <div class="border-t border-gray-200 pt-4 text-left text-sm">
 
@@ -580,10 +570,12 @@
       });
     }
 
-    // Smooth scroll to footer if hash is present after page load
+    // Smooth scroll to footer if hash is present — then strip the hash so reloads don't jump again
     if (window.location.hash === '#footer') {
       setTimeout(function() {
-        document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+        var f = document.getElementById('footer');
+        if (f) f.scrollIntoView({ behavior: 'smooth' });
+        if (history.replaceState) history.replaceState(null, '', window.location.pathname + window.location.search);
       }, 100);
     }
   });

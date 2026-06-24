@@ -31,9 +31,7 @@
           <div class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 space-y-6">
             {{ .Params.founder.bio | markdownify }}
 
-            <p>
-              {{ .Params.founder.closing | default "You are one push-up away from your new identity." }}
-            </p>
+            {{ with .Params.founder.closing }}<p>{{ . }}</p>{{ end }}
 
             <p>
               {{ .Params.founder.signature | default "Dein Chris" }}<br>

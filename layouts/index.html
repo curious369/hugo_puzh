@@ -4,24 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Reload startet oben (Video-Scroll als Hook), kein Browser-Scroll-Restore -->
+  <script>if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }</script>
+
   <!-- SEO -->
-  <title>{{ .Params.seo.title | default "PUZH - AI-Powered Push-Up Training" }}</title>
-  <meta name="description" content="{{ .Params.seo.description | default "The world's cleanest push-up experience. AI-powered. ML-driven. Coming Q1 2026." }}">
-  <meta name="keywords" content="{{ .Params.seo.keywords | default "push-ups, AI fitness, machine learning workout" }}">
+  <title>{{ .Params.seo.title | default "PUZH — AI Content & Automation, by Chris Mönninghoff" }}</title>
+  <meta name="description" content="{{ .Params.seo.description | default "High-end AI content + automation infrastructure. 100+ pro-grade AI videos a day, per brand. By invitation only — work directly with Chris." }}">
+  <meta name="keywords" content="{{ .Params.seo.keywords | default "AI content, AI video, content automation, UGC AI, AI avatars, brand content" }}">
 
   <!-- Open Graph -->
   <meta property="og:title" content="{{ .Params.seo.title }}">
   <meta property="og:description" content="{{ .Params.seo.description }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="https://puzh.com/videos/slider/puzh_com_slider_0008.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ .Params.seo.title }}">
   <meta name="twitter:description" content="{{ .Params.seo.description }}">
+  <meta name="twitter:image" content="https://puzh.com/videos/slider/puzh_com_slider_0008.jpg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- Priority: Slider-Clip #2 (sofort sichtbar) -->
+  <link rel="preload" as="image" href="/videos/slider/puzh_com_slider_0008.jpg">
+  <link rel="preload" as="video" href="/videos/slider/puzh_com_slider_0008.mp4" type="video/mp4">
 
   <!-- CSS -->
   {{ $styles := resources.Get "css/main.css" | postCSS | minify | fingerprint }}
@@ -45,26 +54,42 @@
 
   <main>
 
-    <!-- HERO: Main Message (A/B/C Variants) -->
+    <!-- HERO Container 1: Logo + Headline + Subline (ohne Buttons) — ÜBER dem Slider -->
     {{ partial "section-hero.html" . }}
 
-    <!-- SOCIAL PROOF: Waitlist Count -->
-    {{ partial "section-social-proof.html" . }}
+    <!-- VIDEO-MARQUEE (UGC scroll) -->
+    {{ partial "section-hero-videowall.html" . }}
+    <span id="hero-message"></span>{{/* Scroll-Ziel des Marquee-Pfeils */}}
 
-    <!-- PORTRAIT SLIDER: Apple-Style Portrait Cards -->
-    {{ partial "section-slider-portrait.html" . }}
+    <!-- MANIFEST: Unfair Advantage + "The content game has changed" -->
+    {{ partial "section-manifesto.html" . }}
 
-    <!-- VIDEO CARD: Promo Video -->
-    {{ partial "section-video-card.html" . }}
-
-    <!-- ROADMAP SLIDER: Secret Roadmap Cards -->
+    <!-- BLOCK 1: Plattform-Module (Roadmap-Slider, re-use) -->
     {{ partial "section-slider-roadmap.html" . }}
 
-    <!-- INSTAGRAM WALL: Wall of Discipline -->
-    {{ partial "section-instagram-wall.html" . }}
+    <!-- Flagship-Beispiel (Video-Card) — ZWISCHEN den beiden Slidern -->
+    {{ partial "section-video-card.html" . }}
 
-    <!-- FOUNDER: From Zero to PUZH -->
+    <!-- BLOCK 2: AI-Content-Beispiele (Portrait-Slider, re-use) -->
+    {{ partial "section-slider-portrait.html" . }}
+
+    <!-- CONTENTPLAN: Node-Flow Idee → Kanäle -->
+    {{ partial "section-contentplan.html" . }}
+
+    <!-- SPEED: Lichtgeschwindigkeits-Tunnel + Power-Words -->
+    {{ partial "section-speed.html" . }}
+
+    <!-- KANÄLE: Überall ausgespielt -->
+    {{ partial "section-channels.html" . }}
+
+    <!-- THE UNFAIR ADVANTAGE: Vergleichstabelle Classic vs PUZH -->
+    {{ partial "section-compare.html" . }}
+
+    <!-- FOUNDER -->
     {{ partial "section-founder.html" . }}
+
+    <!-- FAQ -->
+    {{ partial "section-faq.html" . }}
 
     <!-- NEWSLETTER: Email Capture -->
     {{ partial "section-newsletter.html" . }}

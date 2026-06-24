@@ -1,0 +1,60 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     MANIFEST — Unfair Advantage + "The content game has changed".
+     Unsere Design-Standards: große Apple-Typo, Card-/Pill-Stile, DE/EN.
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bg-white dark:bg-black py-20 md:py-28 px-4 transition-colors duration-200">
+  <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8">
+
+    <!-- Headline -->
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-gray-900 dark:text-white mb-8">
+      {{ if eq .Language.Lang "de" }}AI-Content war mein unfairer Vorteil.<br>Für dich kann er das auch sein.{{ else }}AI content gave me an unfair advantage.<br>It can do the same for you.{{ end }}
+    </h2>
+
+    <!-- Intro -->
+    <div class="text-2xl lg:text-3xl text-gray-500 dark:text-gray-400 leading-relaxed space-y-5 max-w-3xl">
+      <p>{{ if eq .Language.Lang "de" }}Mir egal, in welcher Branche du bist — E-Commerce, SaaS, Personal Brand oder Start bei null. Das ist nicht entscheidend.{{ else }}I don't care what industry you're in — e-commerce, SaaS, a personal brand, or starting from zero. None of that matters.{{ end }}</p>
+      <p>{{ if eq .Language.Lang "de" }}Entscheidend ist: <span class="text-gray-900 dark:text-white font-semibold">Marketing ist alles.</span> 2026 dominiert, wer hochwertigen Content in Masse produziert. Keine Spekulation — es passiert bereits.{{ else }}What matters is this: <span class="text-gray-900 dark:text-white font-semibold">marketing is everything.</span> In 2026, whoever produces high-quality content at scale dominates. This isn't speculation — it's already happening.{{ end }}</p>
+      <p>{{ if eq .Language.Lang "de" }}Aber es gibt einen Haken: <span class="text-gray-900 dark:text-white font-semibold">zu viele Tools.</span> Du hast den Content endlich erstellt — und dann geht die eigentliche Arbeit los. Wo speicherst du ihn? Was kopierst du wohin? Du fasst jedes Stück zehnmal an, bevor es live ist. Es funktioniert nur, wenn alles verbunden ist — CRM, ERP, Postfach, Newsletter, Kundenportal.{{ else }}But there's a catch: <span class="text-gray-900 dark:text-white font-semibold">too many tools.</span> You finally make the content — then the real work starts. Where do you store it? What do you copy where? You touch every piece ten times before it's live. It only works when everything is connected — CRM, ERP, inbox, newsletter, client portal.{{ end }}</p>
+    </div>
+
+    <!-- CTA -->
+    <a href="#newsletter" class="inline-block mt-10 rounded-full bg-black text-white dark:bg-white dark:text-black px-8 py-4 text-lg font-semibold hover:opacity-85 transition-opacity duration-200">
+      {{ if eq .Language.Lang "de" }}Anfrage an Chris{{ else }}Talk to Chris{{ end }}
+    </a>
+
+    <!-- The content game has changed -->
+    <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mt-20 mb-10">
+      {{ if eq .Language.Lang "de" }}Das Content-Spiel hat sich verändert.{{ else }}The content game has changed.{{ end }}
+    </h3>
+
+    <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+
+      <!-- The Old Reality -->
+      <div class="rounded-[32px] p-10 md:p-14 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-white/10">
+        <span class="text-xs lg:text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/90 bg-black/5 dark:bg-white/10 px-3 py-1.5 rounded-full border border-gray-300 dark:border-white/20">
+          {{ if eq .Language.Lang "de" }}Die alte Realität{{ else }}The old reality{{ end }}
+        </span>
+        <p class="text-2xl lg:text-3xl text-gray-500 dark:text-gray-400 leading-relaxed mt-8">
+          {{ if eq .Language.Lang "de" }}Content war teuer — Kameras, Studios, Cutter, Schauspieler, Stimmen. Testen kostete Geld; die meisten konnten nur 3–5 Varianten testen. Die größten Budgets gewannen.{{ else }}Content was expensive — cameras, studios, editors, actors, voice talent. Testing burned cash; most could only afford 3–5 variations. The biggest budgets won.{{ end }}
+        </p>
+      </div>
+
+      <!-- The New Reality -->
+      <div class="rounded-[32px] p-10 md:p-14 bg-black text-white dark:bg-white dark:text-black">
+        <span class="text-xs lg:text-sm font-semibold uppercase tracking-wider text-white/90 dark:text-black/70 bg-white/10 dark:bg-black/10 px-3 py-1.5 rounded-full border border-white/20 dark:border-black/20">
+          {{ if eq .Language.Lang "de" }}Die neue Realität{{ else }}The new reality{{ end }}
+        </span>
+        <p class="text-2xl lg:text-3xl opacity-70 leading-relaxed mt-8">
+          {{ if eq .Language.Lang "de" }}KI hat die Content-Kosten auf nahezu null gesenkt. Teste 50 Ansätze für den Preis eines Kaffees. Iteriere täglich statt monatlich. Das Feld wird fair — aber nur für die, die das Können lernen.{{ else }}AI collapsed the cost of content to near zero. Test 50 angles for the price of a coffee. Iterate daily instead of monthly. The field is leveling — but only for those who learn the skill.{{ end }}
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Closing -->
+    <p class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white leading-tight mt-12 max-w-3xl">
+      {{ if eq .Language.Lang "de" }}Wir sind in einem kleinen Zeitfenster. Die Tools existieren — aber 95% können sie nicht richtig nutzen und denken, KI-Content funktioniere nicht. Wer es jetzt lernt, während die Konkurrenz schläft, läuft dem Markt 6–12 Monate voraus.{{ else }}We're in a very small window. The tools exist — but 95% can't use them properly and assume "AI content doesn't work." Learn it now, while the competition is still asleep, and you front-run the market by 6–12 months.{{ end }}
+    </p>
+
+  </div>
+</section>

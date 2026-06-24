@@ -4,16 +4,16 @@
      Large rounded card with video, play/pause control
      ═══════════════════════════════════════════════════════════════ -->
 
-<section class="bg-gray-900 py-16 md:py-20">
+<section class="bg-gray-900 py-16 md:py-20 px-4">
   <div class="container-puzh px-4">
 
     <!-- Section Header -->
     <div class="w-full max-w-6xl mx-auto mb-12">
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-white">
-        {{ if eq .Language.Lang "de" }}PUZH.App bald.{{ else }}PUZH.App soon.{{ end }}
+        {{ if eq .Language.Lang "de" }}Ein Beispiel.{{ else }}One example.{{ end }}
       </h2>
       <p class="text-2xl lg:text-3xl font-bold text-white/80">
-        {{ if eq .Language.Lang "de" }}Zuerst im App Store für iPhone. Arbeiten am Launch.{{ else }}First on App Store for iPhone. Working hard on the launch.{{ end }}
+        {{ if eq .Language.Lang "de" }}So sieht fertiger PUZH-Content aus.{{ else }}This is finished PUZH content.{{ end }}
       </p>
     </div>
 
@@ -41,18 +41,18 @@
         <div data-video-logo style="position: absolute; top: 32px; left: 50%; transform: translateX(-50%); z-index: 9999; pointer-events: none;">
           <!-- VARIANT A: BLACK/WHITE -->
           <div data-logo-variant="variant-a" style="display: none;">
-            <img src="/images/logo_puzh_black.svg" alt="PUZH" class="block dark:hidden" style="height: 100px; width: auto;">
-            <img src="/images/logo_puzh_white.svg" alt="PUZH" class="hidden dark:block" style="height: 100px; width: auto;">
+            <img src="/images/logo_puzh_black.svg" alt="PUZH" class="block dark:hidden h-[60px] md:h-[100px] w-auto">
+            <img src="/images/logo_puzh_white.svg" alt="PUZH" class="hidden dark:block h-[60px] md:h-[100px] w-auto">
           </div>
           <!-- VARIANT B: BLUE/GREEN -->
           <div data-logo-variant="variant-b" style="display: none;">
-            <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="block dark:hidden" style="height: 100px; width: auto;">
-            <img src="/images/logo_puzh_green.svg" alt="PUZH" class="hidden dark:block" style="height: 100px; width: auto;">
+            <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="block dark:hidden h-[60px] md:h-[100px] w-auto">
+            <img src="/images/logo_puzh_green.svg" alt="PUZH" class="hidden dark:block h-[60px] md:h-[100px] w-auto">
           </div>
           <!-- VARIANT C: GREEN/BLUE -->
           <div data-logo-variant="variant-c" style="display: none;">
-            <img src="/images/logo_puzh_green.svg" alt="PUZH" class="block dark:hidden" style="height: 100px; width: auto;">
-            <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="hidden dark:block" style="height: 100px; width: auto;">
+            <img src="/images/logo_puzh_green.svg" alt="PUZH" class="block dark:hidden h-[60px] md:h-[100px] w-auto">
+            <img src="/images/logo_puzh_blue.svg" alt="PUZH" class="hidden dark:block h-[60px] md:h-[100px] w-auto">
           </div>
         </div>
 

@@ -1,0 +1,45 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     THE UNFAIR ADVANTAGE — große Vergleichstabelle Classic vs PUZH.
+     PUZH-Spalte hervorgehoben. Zahlen = Platzhalter. Mobil-safe.
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bg-white dark:bg-black py-16 md:py-24 px-4 transition-colors duration-200">
+  <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8">
+
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-gray-900 dark:text-white">
+      {{ if eq .Language.Lang "de" }}Der unfaire Vorteil.{{ else }}The unfair advantage.{{ end }}
+    </h2>
+    <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 mb-12">
+      {{ if eq .Language.Lang "de" }}Klassisch — oder PUZH. Die Mathematik ist eindeutig.{{ else }}Classic — or PUZH. The math is clear.{{ end }}
+    </p>
+
+    <div class="overflow-hidden rounded-[32px] border border-gray-200 dark:border-white/10">
+
+      <!-- Kopfzeile -->
+      <div class="grid grid-cols-3">
+        <div class="p-2.5 md:p-6 bg-gray-100 dark:bg-gray-900"></div>
+        <div class="p-2.5 md:p-6 bg-gray-100 dark:bg-gray-900 flex justify-center">
+          <span class="inline-block text-xs lg:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full border bg-black/5 dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-500 dark:text-white/90">{{ if eq .Language.Lang "de" }}Klassisch{{ else }}Classic{{ end }}</span>
+        </div>
+        <div class="p-2.5 md:p-6 bg-black dark:bg-white flex justify-center">
+          <span class="inline-block text-xs lg:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full bg-white text-black dark:bg-black dark:text-white">PUZH</span>
+        </div>
+      </div>
+
+      {{ $rows := slice
+        (slice (cond (eq .Language.Lang "de") "Speed" "Speed")            "1×"                                                                  "~50×")
+        (slice (cond (eq .Language.Lang "de") "Output" "Output")          (cond (eq .Language.Lang "de") "paar / Woche" "a few / week")          (cond (eq .Language.Lang "de") "100+ / Tag" "100+ / day"))
+        (slice (cond (eq .Language.Lang "de") "Varianten" "Variations")   (cond (eq .Language.Lang "de") "1, für alle gleich" "1, same for all")  (cond (eq .Language.Lang "de") "15+ Best-in-Class" "15+ best-in-class"))
+        (slice (cond (eq .Language.Lang "de") "Tools" "Tools")            (cond (eq .Language.Lang "de") "20 Tools" "20 tools")                  (cond (eq .Language.Lang "de") "1 Login" "1 login"))
+        (slice (cond (eq .Language.Lang "de") "Abhängigkeit" "Dependency") (cond (eq .Language.Lang "de") "Menschen & Updates" "people & updates") (cond (eq .Language.Lang "de") "keine — frei" "none — free"))
+      }}
+      {{ range $rows }}
+      <div class="grid grid-cols-3 border-t border-gray-200 dark:border-white/10 items-stretch">
+        <div class="p-2.5 md:p-6 flex items-center text-sm md:text-xl lg:text-2xl font-bold break-words min-w-0 text-gray-900 dark:text-white">{{ index . 0 }}</div>
+        <div class="p-2.5 md:p-6 flex items-center justify-center text-center text-sm md:text-2xl lg:text-3xl font-bold break-words min-w-0 text-gray-400 dark:text-gray-500">{{ index . 1 }}</div>
+        <div class="p-2.5 md:p-6 flex items-center justify-center text-center text-sm md:text-2xl lg:text-3xl font-bold break-words min-w-0 bg-black text-white dark:bg-white dark:text-black">{{ index . 2 }}</div>
+      </div>
+      {{ end }}
+
+    </div>
+  </div>
+</section>

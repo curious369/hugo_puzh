@@ -1,15 +1,15 @@
 ---
-title: "PUZH - Push Every Day"
-description: "AI-powered push-up training. Coming Q1 2026."
+title: "PUZH — AI Content & Automation"
+description: "100+ pro-grade AI videos a day, per brand. By invitation only — work directly with Chris Mönninghoff."
 type: "home"
 
 # ═══════════════════════════════════════════════════════════════
 # SEO
 # ═══════════════════════════════════════════════════════════════
 seo:
-  title: "PUZH - AI-Powered Push-Up Training"
-  description: "The world's cleanest push-up experience. AI form tracking, ML progression. Join the waitlist."
-  keywords: "push-ups, AI fitness, machine learning workout, push-up app, iOS app"
+  title: "PUZH — The AI Operating System, by Chris Mönninghoff"
+  description: "High-end AI content + automation infrastructure. 100+ pro-grade AI videos a day, per brand — own avatars, own voices. By invitation only. You work directly with Chris."
+  keywords: "AI content, AI video, content automation, UGC AI, AI avatars, brand content, content infrastructure, AI creator"
 
 # ═══════════════════════════════════════════════════════════════
 # HERO VARIANTS (A/B/C Testing)
@@ -117,80 +117,80 @@ video_card:
 # PORTRAIT SLIDER - Apple Watch Style
 # ═══════════════════════════════════════════════════════════════
 portrait_slider:
-  headline: "Train motivated. Anytime."
-  subheadline: "Home. Office. Park. Daily habit."
+  headline: "What's possible."
+  subheadline: "Real AI content — portrait & landscape. Avatar, voice, music, subtitles."
 
   cards:
-    - badge: "Fitness"
-      title: "Highly motivated for<br>peak performance."
+    - badge: "Avatars"
+      title: "Your own<br>high-end avatars."
       subtitle: ""
-      image: "/images/puzh_portrait_slider_001.webp"
+      image: "/videos/slider/puzh_com_slider_0001.jpg"
 
-    - badge: "AI Powered"
-      title: "Perfect form.<br>Every day."
+    - badge: "Voices"
+      title: "Your own<br>voice."
       subtitle: ""
-      image: "/images/puzh_portrait_slider_003.webp"
+      image: "/videos/slider/puzh_com_slider_0002.jpg"
 
-    - badge: "Progress"
-      title: "From beginner<br>to champion."
+    - badge: "Formats"
+      title: "Portrait &<br>landscape."
       subtitle: ""
-      image: "/images/puzh_portrait_slider_006.webp"
+      image: "/videos/slider/puzh_com_slider_0003.jpg"
 
-    - badge: "Discipline"
-      title: "Your daily<br>routine."
+    - badge: "Music"
+      title: "Sound that fits<br>your brand."
       subtitle: ""
-      image: "/images/puzh_portrait_slider_010.webp"
+      image: "/videos/slider/puzh_com_slider_0004.jpg"
 
-    - badge: "Results"
-      title: "Visible results.<br>Measurable power."
+    - badge: "Subtitles"
+      title: "Automatic<br>subtitles."
       subtitle: ""
-      image: "/images/puzh_portrait_slider_099.webp"
+      image: "/videos/slider/puzh_com_slider_0005.jpg"
 
-    - badge: "Global"
-      title: "Join our<br>worldwide movement."
+    - badge: "Outro"
+      title: "Consistent<br>branding."
       subtitle: ""
-      image: "/images/puzh_portrait_slider_036.webp"
+      image: "/videos/slider/puzh_com_slider_0006.jpg"
 
 # ═══════════════════════════════════════════════════════════════
 # ROADMAP SLIDER - Secret Roadmap
 # ═══════════════════════════════════════════════════════════════
 roadmap_slider:
-  headline: "Our \"Secret\" Roadmap."
-  subheadline: "Building in public. Sharing the journey."
+  headline: "One platform. One login."
+  subheadline: "No more 20 tools. Everything in one place — simple."
 
   cards:
-    - badge: "Coming Soon"
-      title: "Your AI Coach<br>Awakens"
+    - badge: "Content"
+      title: "AI content<br>on demand."
       subtitle: ""
       image: "/images/puzh_secret_slider_011.webp"
 
-    - badge: "Q2 2026"
-      title: "Wear Your Progress<br>PUZH Store Opens"
+    - badge: "Distribution"
+      title: "Auto-published<br>everywhere."
       subtitle: ""
       image: "/images/puzh_secret_slider_013.webp"
 
-    - badge: "Q3 2026"
-      title: "Sweat Becomes<br>Assets"
+    - badge: "Inbox + CRM"
+      title: "All messages,<br>one inbox."
       subtitle: ""
       image: "/images/puzh_secret_slider_016.webp"
 
-    - badge: "Future"
-      title: "Science Meets<br>Longevity"
+    - badge: "Community"
+      title: "Comments & DMs,<br>handled."
       subtitle: ""
       image: "/images/puzh_secret_slider_018.webp"
 
-    - badge: "Vision"
-      title: "Our Global<br>PUZHup Community"
+    - badge: "PUZH Field"
+      title: "Field meets<br>marketing."
       subtitle: ""
       image: "/images/puzh_secret_slider_019.webp"
 
-    - badge: "Join Us"
-      title: "Become a<br>PUZH Ambassador"
+    - badge: "Client Portal"
+      title: "See & approve<br>in real time."
       subtitle: ""
       image: "/images/puzh_secret_slider_017.webp"
 
-    - badge: "Charity"
-      title: "PUZH Day Charity<br>Million Reps for Kids"
+    - badge: "Multi-Brand"
+      title: "Many brands,<br>one system."
       subtitle: ""
       image: "/images/puzh_secret_slider_032.webp"
 
@@ -213,16 +213,14 @@ instagram_wall:
 # FOUNDER SECTION - From Zero to PUZH
 # ═══════════════════════════════════════════════════════════════
 founder:
-  headline: "From Zero to PUZH"
-  subheadline: "One journey. One million pushups. One app."
+  headline: "You work directly with me."
+  subheadline: "Together we adapt the platform to your business processes."
   bio: |
-    I was inspired by <svg class="inline-block w-6 h-6 align-middle" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> [**Kevin Cullum's**](https://instagram.com/1million_pullups) journey to 1,000,000 pushups. I wanted that too.
+    Not a tool you have to figure out on your own. We sit down together and shape PUZH around your business processes — your brands, your workflows, your content, all connected: CRM, inbox, newsletter, automation. Instead of 20 separate tools, one system that fits your business.
 
-    With PUZH.app you and I can do PUZHups every day. And stay motivated.
-
-  closing: "New day. Same puzhup habit."
-  signature: "Your Chris Mönninghoff"
-  title: "Founder [PUZH.app](https://puzh.app) und [SNAB.app](https://snab.app)"
+  closing: ""
+  signature: "Chris Mönninghoff"
+  title: "Founder, PUZH"
   image: "/images/chris_moenninghoff_25_032 Kopie.webp"
 
 ---

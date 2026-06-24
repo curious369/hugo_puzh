@@ -3,6 +3,10 @@
 @tailwind utilities;
 /* Updated: Navigation gaps optimized */
 
+/* Scrollbar-Platz immer reservieren → kein horizontaler Content-Sprung (z.B. /login/ vs. Home) */
+html { scrollbar-gutter: stable; }
+html, body { overflow-x: hidden; max-width: 100%; }
+
 /* ═══════════════════════════════════════════════════════════════
    PUZH.COM - RESPONSIVE DESIGN SYSTEM
    ═══════════════════════════════════════════════════════════════

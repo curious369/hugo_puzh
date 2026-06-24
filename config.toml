@@ -28,6 +28,12 @@ disableKinds = ["taxonomy", "term"]
   description = "PUZH - The minimal productivity system. Join the waitlist."
   author = "Chris Monninghoff"
 
+  # Media base URL (Cloudflare R2). Empty = serve videos locally (Pages CDN, edge-cached).
+  # R2 (media.puzh.com) is set up + files uploaded, but its custom domain is not
+  # edge-cached (cf-cache-status: DYNAMIC) → 42 marquee videos load slow/flaky.
+  # Re-enable by setting the R2 URL here ONCE a Cloudflare Cache Rule caches media.puzh.com.
+  mediaBaseURL = ""
+
   # Social & Contact
   email = "hello@puzh.com"
   twitter = "@puzh_com"

@@ -1,0 +1,51 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     TRADITIONELL vs. PUZH — 2 große Karten.
+     Titel-Größe + Badge-Pill EXAKT wie Roadmap-Slider-Cards.
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bg-white dark:bg-black py-16 md:py-20 px-4 transition-colors duration-200">
+  <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8">
+
+    <!-- Section-Header: exakt wie Slider -->
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-gray-900 dark:text-white">
+      {{ if eq .Language.Lang "de" }}Schluss mit dem Tool-Chaos.{{ else }}End the tool chaos.{{ end }}
+    </h2>
+    <p class="text-2xl lg:text-3xl font-bold text-gray-600 dark:text-gray-400 mb-12">
+      {{ if eq .Language.Lang "de" }}Tools, die sich ständig ändern — oder eine Plattform, die einfach läuft.{{ else }}Tools that keep changing — or one platform that just runs.{{ end }}
+    </p>
+
+    <!-- 2 große Karten -->
+    <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+
+      <!-- Traditionell -->
+      <div class="rounded-[32px] p-10 md:p-14 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-white/10 flex flex-col min-h-[340px]">
+        <div class="mb-8">
+          <span class="text-xs lg:text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/90 bg-black/5 dark:bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-gray-300 dark:border-white/20">
+            {{ if eq .Language.Lang "de" }}Traditionell{{ else }}The old way{{ end }}
+          </span>
+        </div>
+        <h3 class="text-3xl lg:text-4xl font-bold leading-tight text-gray-900 dark:text-white mb-5">
+          {{ if eq .Language.Lang "de" }}Copy hin und her.<br>Zeit, die du nie zurückbekommst.{{ else }}Copy back and forth.<br>Time you never get back.{{ end }}
+        </h3>
+        <p class="text-base lg:text-lg text-gray-500 dark:text-gray-400 leading-relaxed mt-auto">
+          {{ if eq .Language.Lang "de" }}20 Tools, ständig neue Updates und Knöpfe. Gebaut von Programmierern — nicht für Unternehmer.{{ else }}20 tools, constant updates and buttons. Built by engineers — not for entrepreneurs.{{ end }}
+        </p>
+      </div>
+
+      <!-- Mit PUZH -->
+      <div class="rounded-[32px] p-10 md:p-14 bg-black text-white dark:bg-white dark:text-black flex flex-col min-h-[340px]">
+        <div class="mb-8">
+          <span class="text-xs lg:text-sm font-semibold uppercase tracking-wider text-white/90 dark:text-black/70 bg-white/10 dark:bg-black/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 dark:border-black/20">
+            {{ if eq .Language.Lang "de" }}Mit PUZH{{ else }}With PUZH{{ end }}
+          </span>
+        </div>
+        <h3 class="text-3xl lg:text-4xl font-bold leading-tight mb-5">
+          {{ if eq .Language.Lang "de" }}Du klickst —<br>und bekommst Ergebnisse.{{ else }}You click —<br>and get results.{{ end }}
+        </h3>
+        <p class="text-base lg:text-lg opacity-70 leading-relaxed mt-auto">
+          {{ if eq .Language.Lang "de" }}Eine Plattform, ein Login. 100+ Content-Stücke, konsistent, vollautomatisch. 24/7 sichtbar.{{ else }}One platform, one login. 100+ pieces of content, consistent, fully automated. Visible 24/7.{{ end }}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

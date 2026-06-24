@@ -1,0 +1,68 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     FAQ — Häufige Fragen. Native <details>/<summary> Accordions (kein JS).
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+  summary::-webkit-details-marker{display:none;}
+  summary::marker{content:"";}
+</style>
+<section class="bg-white dark:bg-black py-16 md:py-20 px-4 transition-colors duration-200">
+  <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8">
+
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-10 text-gray-900 dark:text-white">
+      {{ if eq .Language.Lang "de" }}Häufige Fragen.{{ else }}Common questions.{{ end }}
+    </h2>
+
+    <div class="border-b border-gray-200 dark:border-white/10">
+
+      <details class="group border-t border-gray-200 dark:border-white/10 py-6">
+        <summary class="flex justify-between items-center gap-4 cursor-pointer list-none text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+          <span>{{ if eq .Language.Lang "de" }}Was ist PUZH?{{ else }}What is PUZH?{{ end }}</span>
+          <span class="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">{{ if eq .Language.Lang "de" }}PUZH ist die Content-Infrastruktur hinter deiner Marke: 100+ professionelle AI-Videos pro Tag — eigene High-End-Avatare und Stimmen, Musik, Untertitel und automatisches Publishing auf jedem Kanal. Multi-Brand, Multi-Voice, Multi-Channel, Multi-Analytics — ein Login. Kein Overwhelm: Fokus auf hochwertigen Output, der konvertiert.{{ else }}PUZH is the content infrastructure behind your brand: 100+ professional AI videos a day — your own high-end avatars and voices, music, subtitles and automatic publishing across every channel. Multi-brand, multi-voice, multi-channel, multi-analytics — one login. No overwhelm: the focus is high-quality output that converts.{{ end }}</p>
+      </details>
+
+      <details class="group border-t border-gray-200 dark:border-white/10 py-6">
+        <summary class="flex justify-between items-center gap-4 cursor-pointer list-none text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+          <span>{{ if eq .Language.Lang "de" }}Für wen ist PUZH gedacht?{{ else }}Who is it for?{{ end }}</span>
+          <span class="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">{{ if eq .Language.Lang "de" }}PUZH ist B2B und ausschließlich auf Einladung verfügbar. Es ist für Marken gemacht, die im großen Maßstab veröffentlichen wollen, ohne ein ganzes Produktionsteam aufzubauen.{{ else }}PUZH is B2B and available by invitation only. It is built for brands that want to publish at scale without building an entire production team.{{ end }}</p>
+      </details>
+
+      <details class="group border-t border-gray-200 dark:border-white/10 py-6">
+        <summary class="flex justify-between items-center gap-4 cursor-pointer list-none text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+          <span>{{ if eq .Language.Lang "de" }}Wie viele Videos könnt ihr wirklich produzieren?{{ else }}How many videos can you really produce?{{ end }}</span>
+          <span class="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">{{ if eq .Language.Lang "de" }}Über 100 fertige Videos pro Marke und Tag — in Hoch- und Querformat, mit automatischen Untertiteln, Musik und Outro. Das ist nicht der Ausnahmefall, sondern der Standard.{{ else }}Over 100 finished videos per brand per day — in portrait and landscape, with automatic subtitles, music and outro. That is not the exception, it is the standard.{{ end }}</p>
+      </details>
+
+      <details class="group border-t border-gray-200 dark:border-white/10 py-6">
+        <summary class="flex justify-between items-center gap-4 cursor-pointer list-none text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+          <span>{{ if eq .Language.Lang "de" }}Ist der KI-Content von echtem Content unterscheidbar?{{ else }}Is the AI content distinguishable from real content?{{ end }}</span>
+          <span class="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">{{ if eq .Language.Lang "de" }}Wir setzen auf eigene High-End-Avatare und Stimmen, nicht auf Standard-Templates. Das Ergebnis ist auf Markenniveau — gemacht, um zu performen, nicht um aufzufallen.{{ else }}We use our own high-end avatars and voices, not stock templates. The result is brand-grade — built to perform, not to stand out as AI.{{ end }}</p>
+      </details>
+
+      <details class="group border-t border-gray-200 dark:border-white/10 py-6">
+        <summary class="flex justify-between items-center gap-4 cursor-pointer list-none text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+          <span>{{ if eq .Language.Lang "de" }}Was kostet das?{{ else }}What does it cost?{{ end }}</span>
+          <span class="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">{{ if eq .Language.Lang "de" }}Preise gibt es auf Anfrage, da PUZH nur auf Einladung verfügbar ist. Jede Zusammenarbeit wird auf deine Marke zugeschnitten.{{ else }}Pricing is available on request, since PUZH is invitation only. Every engagement is tailored to your brand.{{ end }}</p>
+      </details>
+
+      <details class="group border-t border-gray-200 dark:border-white/10 py-6">
+        <summary class="flex justify-between items-center gap-4 cursor-pointer list-none text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+          <span>{{ if eq .Language.Lang "de" }}Wie fangen wir an?{{ else }}How do we start?{{ end }}</span>
+          <span class="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 leading-relaxed">{{ if eq .Language.Lang "de" }}Du arbeitest direkt mit Chris — kein Vertriebstrichter, kein Agentur-Pingpong. Trag dich ein, und wir prüfen, ob PUZH zu deiner Marke passt.{{ else }}You work directly with Chris — no sales funnel, no agency ping-pong. Reach out and we will check whether PUZH is the right fit for your brand.{{ end }}</p>
+      </details>
+
+    </div>
+
+  </div>
+</section>

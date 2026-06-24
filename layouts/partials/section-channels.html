@@ -1,0 +1,21 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     KANÄLE — "Überall ausgespielt". Dunkler BG. Pills gut sichtbar.
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bg-[#060606] py-16 md:py-20 px-4">
+  <div class="w-full max-w-[1100px] mx-auto px-4 lg:px-8">
+
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-left mb-4 text-white">
+      {{ if eq .Language.Lang "de" }}Überall ausgespielt.{{ else }}Published everywhere.{{ end }}
+    </h2>
+    <p class="text-2xl lg:text-3xl font-bold text-gray-400 mb-10">
+      {{ if eq .Language.Lang "de" }}Ein Klick — dein Content geht raus, auf jeden Kanal.{{ else }}One click — your content ships to every channel.{{ end }}
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+      {{ range slice "Instagram" "LinkedIn" "YouTube" "TikTok" "X" "Facebook" "Bluesky" "Telegram" "Newsletter" "WhatsApp" }}
+      <span class="px-6 py-3 rounded-full bg-gray-800 border border-gray-700 text-base lg:text-lg font-semibold text-white">{{ . }}</span>
+      {{ end }}
+    </div>
+
+  </div>
+</section>

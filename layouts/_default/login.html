@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{{ .Lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if eq .Language.Lang "de" }}Login{{ else }}Login{{ end }} | PUZH</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  {{ $styles := resources.Get "css/main.css" | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}">
+  <script>
+    // Dark mode init (match site behaviour)
+    (function(){ var t = localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark'); } })();
+  </script>
+</head>
+<body class="bg-[#f5f5f7] dark:bg-black min-h-screen flex flex-col">
+
+  {{ partial "header.html" . }}
+
+  <main class="flex-1 text-black dark:text-white pt-[130px] pb-20">
+    <div class="max-w-[980px] mx-auto px-4 text-center">
+
+      <!-- PUZH Logo -->
+      <div class="flex justify-center items-center pb-8">
+        <img src="/images/logo_puzh_black.svg" alt="PUZH" class="h-24 w-auto dark:hidden">
+        <img src="/images/logo_puzh_white.svg" alt="PUZH" class="h-24 w-auto hidden dark:block">
+      </div>
+
+      <!-- Untertitel -->
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-500 dark:text-gray-400 mb-16">
+        {{ if eq .Language.Lang "de" }}Mandantenportal{{ else }}Client Portal{{ end }}
+      </h2>
+
+      <!-- Login Formular -->
+      <form class="w-full max-w-md mx-auto text-left space-y-6 pb-20"
+            onsubmit="event.preventDefault(); window.location.href='https://app.puzh.com/login';">
+        <div>
+          <input type="email" id="email" name="email" required
+                 placeholder="{{ if eq .Language.Lang "de" }}Deine E-Mail-Adresse{{ else }}Your email{{ end }}"
+                 class="w-full px-5 py-3 rounded-full border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#007aff] bg-white dark:bg-gray-900 text-black dark:text-white mb-3" />
+        </div>
+        <div>
+          <input type="password" id="password" name="password" required
+                 placeholder="{{ if eq .Language.Lang "de" }}Passwort{{ else }}Password{{ end }}"
+                 class="w-full px-5 py-3 rounded-full border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#007aff] bg-white dark:bg-gray-900 text-black dark:text-white" />
+        </div>
+        <div>
+          <button type="submit"
+                  class="w-full bg-[#107aff] hover:bg-[#0061d3] text-white font-semibold py-3 px-6 rounded-full transition duration-200 ease-in-out">
+            {{ if eq .Language.Lang "de" }}Anmelden{{ else }}Log in{{ end }}
+          </button>
+        </div>
+        <div class="text-center text-sm pt-2">
+          <a href="#" class="text-[#007aff] hover:underline">{{ if eq .Language.Lang "de" }}Passwort vergessen?{{ else }}Forgot password?{{ end }}</a>
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>
